@@ -1,4 +1,5 @@
 #include "../include/nha_hang.h"
+/*Thuc hien: Tran Pham Vinh Quang*/
 bool ghiFileThucDon(TD*td, char tenFile[])
 {
     FILE*f = fopen(tenFile, "w");
