@@ -1,4 +1,5 @@
 #include "../include/nha_hang.h"
+/*Thuc hien: Nguyen Tai Nang*/
 // 1. Khoi tao va quan ly bo nho
 MA* taoMonAn(char ma[], char ten[], char loai[], double gia){
     MA* mon =(MA*)malloc(sizeof(MA)); // khai báo vùng nhớ cho món ăn
