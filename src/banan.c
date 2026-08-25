@@ -1,5 +1,5 @@
 #include "../include/nha_hang.h"
-
+/*Thuc hien: Tran Pham Vinh Quang*/
 // 8. Quan ly Ban an & Thanh toan
 void khoiTaoBan(Ban *ban, int soBan)
 {
