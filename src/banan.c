@@ -1,7 +1,5 @@
 #include "../include/nha_hang.h"
-/*
-Các hàm khoiTaoBan, goiMon, tinhTongTien, thanhToanBan.
-*/
+
 // 8. Quan ly Ban an & Thanh toan
 void khoiTaoBan(Ban *ban, int soBan);
 bool goiMon(Ban *ban, MA *mon);
