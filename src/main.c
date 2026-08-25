@@ -1,0 +1,40 @@
+#include "../include/nha_hang.h"
+
+int main() {
+    TD thucDon;
+    khoiTaoThucDon(&thucDon);
+    int luonChon;
+
+    do {
+        printf("\n================ QUAN LY NHA HANG ================\n");
+        printf("1. Nhap / Them mon an moi\n");
+        printf("2. Hien thi danh sach thuc don\n");
+        printf("3. Tim kiem mon an\n");
+        printf("4. Xoa mon an\n");
+        printf("5. Cap nhat thong tin mon an\n");
+        printf("6. Sap xep thuc don\n");
+        printf("7. Doc / Ghi file text\n");
+        printf("8. Quon ly ban an & Thanh toan\n");
+        printf("0. Thoat chuong trinh\n");
+        printf("==================================================\n");
+        printf("Nhap lua chon cua ban: ");
+        scanf("%d", &luonChon);
+
+        switch (luonChon) {
+            case 1:
+                // Goi ham them mon
+                break;
+            case 2:
+                hienThiThucDon(&thucDon);
+                break;
+            case 0:
+                giaiPhongThucDon(&thucDon);
+                printf("Da thoat chuong trinh.\n");
+                break;
+            default:
+                printf("Lua chon khong hop le!\n");
+        }
+    } while (luonChon != 0);
+
+    return 0;
+}
