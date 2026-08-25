@@ -1,0 +1,3 @@
+\*
+Các hàm ghiFileThucDon, docFileThucDon.
+*\
