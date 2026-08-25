@@ -1,34 +1,35 @@
+
 #include "../include/nha_hang.h"
 /*Thuc hien: Nguyen Tai Nang*/
 // 1. Khoi tao va quan ly bo nho
 MA* taoMonAn(char ma[], char ten[], char loai[], double gia){
-    MA* mon =(MA*)malloc(sizeof(MA)); // khai báo vùng nhớ cho món ăn
-    if(mon == NULL){                    // kiểm tra NULL và báo lỗi
+    MA* mon =(MA*)malloc(sizeof(MA)); // khai bao vung nho cho mon an
+    if(mon == NULL){                    // kiem tra NULL va bao loi
         printf("Loi!"); return NULL;
     }
-    strcpy(mon->MaMon, ma);     // sao chép mã món ăn 
+    strcpy(mon->MaMon, ma);     // sao chep ma mon an 
     strcpy(mon->Ten, ten);
     strcpy(mon->Loai, loai);
     mon->Gia = gia;
-    mon-> next = NULL;           // gấn con trỏ next  =NULL  vì chưa liên kết 
+    mon-> next = NULL;           // gan con tro next = NULL vi chua lien ket 
     return mon;
 }
 
 void khoiTaoThucDon(TD *td){
-    if(td != NULL){     // kiểm tra con trỏ td khác null 
+    if(td != NULL){     // kiem tra con tro td khac null 
         td->head = NULL;
         td->count = 0;
     }
 }
 void giaiPhongThucDon(TD *td){
-    MA *current = td->head;             //Bắt đầu từ nút đầu
+    MA *current = td->head;             // Bat dau tu nut dau
     while(current != NULL){
-        MA *temp = current;             //Giữ nút hiện tại
-        current = current->next;        //Nhảy sang nút tiếp theo
-        free(temp);                     //Giair phóng
+        MA *temp = current;             // Giu nut hien tai
+        current = current->next;        // Nhay sang nut tiep theo
+        free(temp);                     // Giai phong
     }
-    td-> head = NULL;                   // Đặt con trỏ đầu danh sách về NULL
-    td->count = 0;                      // ds rỗng
+    td-> head = NULL;                   // Dat con tro dau danh sach ve NULL
+    td->count = 0;                      // ds rong
 }
 
 // 2. Nhap va Them mon
