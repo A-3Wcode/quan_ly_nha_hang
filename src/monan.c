@@ -1,7 +1,5 @@
 #include "../include/nha_hang.h"
-/*
-Các hàm taoMonAn, khoiTaoThucDon, giaiPhongThucDon, kiemTraTrungMa, themMonAn, nhapDanhSachMonAn, hienThiMonAn, hienThiThucDon.
-*/
+
 // 1. Khoi tao va Quan ly bo nho
 MA* taoMonAn(char ma[], char ten[], char loai[], double gia);
 void khoiTaoThucDon(TD *td);
