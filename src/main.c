@@ -1,8 +1,8 @@
 #include "../include/nha_hang.h"
 
 int main() {
-    TD thucDon;
-    khoiTaoThucDon(&thucDon);
+    TD td;
+    khoiTaoThucDon(&td);
     int luonChon;
 
     themMonAn(&td, taoMonAn("MA01", "Com Tam", "Mon chinh", 35.0));
@@ -30,10 +30,10 @@ int main() {
                 // Goi ham them mon
                 break;
             case 2:
-                hienThiThucDon(&thucDon);
+                hienThiThucDon(&td);
                 break;
             case 0:
-                giaiPhongThucDon(&thucDon);
+                giaiPhongThucDon(&td);
                 printf("Da thoat chuong trinh.\n");
                 break;
             default:
