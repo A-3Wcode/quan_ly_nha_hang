@@ -71,103 +71,93 @@ TD timKiemTheoKhoangGia(TD *td, double giaMin, double giaMax){
 	return ketQua;
 }
 
-// 6. Cap nhat va Sap xep
-bool capNhatMonAn(TD *td, char ma[]){
-	if (td == NULL || td->head == NULL) {
-        printf("Thuc don rong!\n");
-        return false;
-    }
+// 6. Sap xep
+void chiaDoiDanhSach(MA *mon, MA **dsTruoc, MA **dsSau){
+	if(mon == NULL || mon->next == NULL){
+		return;
+	}
 	
-	MA *mon = timKiemTheoMa(td, ma);
-	if (mon == NULL) {
-        printf("Khong tim thay mon an co ma %s!\n", ma);
-        return false;
-    }
+	MA *slow = mon;
+	MA *fast = mon->next;
 	
-	char ten[50];
-	char loai[30];
-	double gia;
-	int choose = 0;
-	
-	do{
-		printf("\n=== CHON THONG TIN CAN CAP NHAT (%s) ===\n", mon->MaMon);
-        printf("1. Cap nhat Ten mon\n");
-        printf("2. Cap nhat Loai mon\n");
-        printf("3. Cap nhat Gia tien\n");
-        printf("4. Cap nhat Tat ca\n");
-        printf("0. Hoan tat & Thoat\n");
-        printf("Lua chon: ");
-		
-		if (scanf("%d", &choose) != 1) {
-            getchar();
-            continue;
-        }
-        getchar();
-        
-		switch(choose){
-			case 1:{
-				printf("Nhap ten mon moi: ");
-                fgets(ten, sizeof(ten), stdin);
-                ten[strcspn(ten, "\n")] = '\0';
-    			strcpy(mon->Ten, ten);
-                printf("Cap nhat Ten thanh cong!\n");
-                break;
-			}
-			case 2:{
-				printf("Nhap loai mon moi: ");
-                fgets(loai, sizeof(loai), stdin);
-                loai[strcspn(loai, "\n")] = '\0';
-                strcpy(mon->Loai, loai);
-                printf("Cap nhat Loai thanh cong!\n");
-                break;
-			}
-			case 3:{
-				do {
-                    printf("Nhap gia tien moi (>0): ");
-                    scanf("%lf", &gia);
-                    getchar();
-                    if (gia <= 0) printf("Gia phai lon hon 0!\n");
-                }while (gia <= 0);
-                mon->Gia = gia;
-                printf("Cap nhat Gia thanh cong!\n");
-                break;
-			}
-			case 4:{
-				printf("Nhap ten mon moi: ");
-                fgets(ten, sizeof(ten), stdin);
-                ten[strcspn(ten, "\n")] = '\0';
-                strcpy(mon->Ten, ten);
-
-                printf("Nhap loai mon moi: ");
-                fgets(loai, sizeof(loai), stdin);
-                loai[strcspn(loai, "\n")] = '\0';
-                strcpy(mon->Loai, loai);
-                
-                do {
-                    printf("Nhap gia tien moi (>0): ");
-                    scanf("%lf", &gia);
-                    getchar();
-                    if (gia <= 0) printf("Gia phai lon hon 0!\n");
-                } while (gia <= 0);
-                mon->Gia = gia;
-
-                printf("Cap nhat tat ca thong tin thanh cong!\n");
-                break;
-			}
-			case 0:{
-				printf("Thoat cap nhat mon!\n");
-				break;
-			}
-			default:{
-				printf("Lua chon khong hop le!\n");
-				break;
-			}   
+	while(fast != NULL){
+		fast = fast->next;
+		if(fast != NULL){
+			slow = slow->next;
+			fast = fast->next;
 		}
-	}while(choose != 0);
+	}
 	
-	return true;
+	*dsTruoc = mon;
+	*dsSau = slow->next;
+	slow->next = NULL;
 }
 
-void sapXepTheoMa(TD *td, bool tangDan);
-void sapXepTheoTen(TD *td, bool tangDan);
-void sapXepTheoGia(TD *td, bool tangDan);
+bool soSanhMonAn(MA *a, MA *b, int tieuChuan, bool tangDan){
+	int temp = 0;
+	
+	switch(tieuChuan){
+		case 1:{
+			temp = strcmp(a->MaMon, b->MaMon);
+			break;
+		}
+		case 2:{
+			temp = strcmp(a->Ten, b->Ten);
+			break;
+		}
+		case 3:{
+			if(a->Gia < b->Gia) temp = -1;
+			else if(a->Gia > b->Gia) temp = 1;
+			else temp = 0;
+			break;
+		}
+	}
+	
+	return tangDan? (temp<=0) : (temp>=0);
+}
+
+MA* tron2DanhSach(MA *a, MA *b, int tieuChuan, bool tangDan){
+	if(a == NULL) return b;
+	if(b == NULL) return a;
+	
+	MA *ketQua = NULL;
+	
+	if(soSanhMonAn(a, b, tieuChuan, tangDan)){
+		ketQua = a;
+		ketQua->next = tron2DanhSach(a->next, b, tieuChuan, tangDan);	
+	}else{
+		ketQua = b;
+		ketQua->next = tron2DanhSach(a, b->next, tieuChuan, tangDan);
+	}
+	
+	return ketQua;
+}
+
+void mergeSort(MA **headRef, int tieuChuan, bool tangDan){
+	MA *head = *headRef;
+	if(head == NULL || head->next == NULL) return;
+	MA *a = NULL, *b = NULL;
+	
+	chiaDoiDanhSach(head, &a, &b);
+
+    mergeSort(&a, tieuChuan, tangDan);
+    mergeSort(&b, tieuChuan, tangDan);
+    
+    *headRef = tron2DanhSach(a, b, tieuChuan, tangDan);
+}
+
+
+void sapXepTheoMa(TD *td, bool tangDan) {
+    if(td == NULL || td->head == NULL) return;
+    mergeSort(&(td->head), 1, tangDan);
+}
+
+void sapXepTheoTen(TD *td, bool tangDan) {
+    if(td == NULL || td->head == NULL) return;
+    mergeSort(&(td->head), 2, tangDan);
+}
+
+void sapXepTheoGia(TD *td, bool tangDan) {
+    if(td == NULL || td->head == NULL) return;
+    mergeSort(&(td->head), 3, tangDan);
+}
