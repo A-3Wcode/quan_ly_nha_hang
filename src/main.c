@@ -5,6 +5,11 @@ int main() {
     khoiTaoThucDon(&thucDon);
     int luonChon;
 
+    themMonAn(&td, taoMonAn("MA01", "Com Tam", "Mon chinh", 35.0));
+    themMonAn(&td, taoMonAn("MA02", "Pho Bo", "Mon chinh", 45.0));
+    themMonAn(&td, taoMonAn("MA03", "Tra Sua", "Giai khat", 25.0));
+    themMonAn(&td, taoMonAn("MA04", "Bun Ca", "Mon chinh", 30.0));
+
     do {
         printf("\n================ QUAN LY NHA HANG ================\n");
         printf("1. Nhap / Them mon an moi\n");
