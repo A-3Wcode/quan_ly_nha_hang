@@ -1,4 +1,4 @@
-#include "../include/nha_hang.h"
+#include "include/nha_hang.h"
 
 int main() {
     TD td;
