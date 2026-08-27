@@ -65,7 +65,8 @@ void nhapDanhSachMonAn(TD *td){
     printf("Nhap so luong mon an:");
     scanf("%d",&n);
     getchar();
-    for(int i = 0; i < n; i++){
+    int i;
+    for(i = 0; i < n; i++){
         char ma[15], ten[50], loai[30]; 
         double gia;
 
