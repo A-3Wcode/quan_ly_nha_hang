@@ -26,8 +26,14 @@ int main() {
         scanf("%d", &luonChon);
 
         switch (luonChon) {
-            case 1:{}
-            case 2:{}
+            case 1:{
+                nhapDanhSachMonAn(&td);
+                break;
+            }
+            case 2:{
+                hienThiThucDon(&td);
+            	break;
+            }
             case 3:{}
             case 4:{}
             case 5:{}
