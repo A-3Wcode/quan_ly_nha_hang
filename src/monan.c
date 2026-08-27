@@ -112,7 +112,7 @@ void hienThiThucDon(TD *td){
         return;
     }
     printf("\n-----DANH SACH THUC DON-----\n");
-    printf("| %-12s | %-25s | %-15s | %-10.2f |\n", "Ma Mon", " Ten","Loai", "Gia");
+    printf("| %-12s | %-25s | %-15s | %-10.2s |\n", "Ma Mon", " Ten","Loai", "Gia");
     printf("---------------------------------------------------------------\n");
     MA *p = td->head;
     while(p != NULL){
