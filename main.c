@@ -38,10 +38,12 @@ int main() {
                 nhapDanhSachMonAn(&td);
                 break;
             }
+            
             case 2:{
                 hienThiThucDon(&td);
             	break;
             }
+            
             case 3:{
                 int timKiemLuaChon = -1;
                 do{
@@ -126,6 +128,7 @@ int main() {
                     }
                 }while(timKiemLuaChon != 0);
             }
+            
             case 4:{
                 int xoaLuaChon = -1;
                 do{
@@ -187,6 +190,7 @@ int main() {
                     printf("Khong tim thay mon an voi ma %s\n", ma);
                 }
             }
+            
             case 6:{
                 int sapXepLuaChon = -1;
                 do{
@@ -259,11 +263,16 @@ int main() {
                     }
                 }while(sapXepLuaChon != 0);
             }
+            
             case 7:{}
+           
             case 8:{}
-            case 0:{}
-            default:
-                printf("Lua chon khong hop le!\n");
+            
+            case 0:{
+                printf("Thoat chuong trinh!\n");
+                break;
+            }
+            default: printf("Lua chon khong hop le!\n");
         }
     } while (luonChon != 0);
 
