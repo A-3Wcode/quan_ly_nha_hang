@@ -157,7 +157,12 @@ void sapXepTheoTen(TD *td, bool tangDan) {
     mergeSort(&(td->head), 2, tangDan);
 }
 
+void sapXepTheoLoai(TD *td, bool tangDan) {
+	if(td == NULL || td->head == NULL) return;
+	mergeSort(&(td->head), 3, tangDan);
+}
+
 void sapXepTheoGia(TD *td, bool tangDan) {
     if(td == NULL || td->head == NULL) return;
-    mergeSort(&(td->head), 3, tangDan);
+    mergeSort(&(td->head), 4, tangDan);
 }

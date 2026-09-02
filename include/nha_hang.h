@@ -60,6 +60,7 @@ int xoaTheoTen(TD *td, char ten[]);
 bool capNhatMonAn(TD *td, char ma[]);
 void sapXepTheoMa(TD *td, bool tangDan);
 void sapXepTheoTen(TD *td, bool tangDan);
+void sapXepTheoLoai(TD *td, bool tangDan);
 void sapXepTheoGia(TD *td, bool tangDan);
 
 // 7. Doc va Ghi file text
