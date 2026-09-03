@@ -4,6 +4,7 @@ int main() {
     TD td;
     khoiTaoThucDon(&td);
     int luonChon;
+    // Doc file
 
     themMonAn(&td, taoMonAn("MA01", "Com Tam", "Mon chinh", 35.0));
     themMonAn(&td, taoMonAn("MA02", "Pho Bo", "Mon chinh", 45.0));
@@ -201,8 +202,7 @@ int main() {
                     printf("4. Sap xep theo ten (Giam Dan)\n");
                     printf("5. Sap xep theo loai (Tang Dan)\n");
                     printf("6. Sap xep theo loai (Giam Dan)\n");
-                    printf("7. Sap xep theo gia (Tang Dan)\n");
-                    printf("8. Sap xep theo gia (Giam Dan)\n");
+                    printf("7. Sap xep theo gia (Giam Dan)\n");
                     printf("0. Quay lai menu chinh\n");
                     printf("Nhap lua chon cua ban: ");
                     do{
@@ -265,9 +265,6 @@ int main() {
             }
             
             case 7:{}
-           
-            case 8:{}
-            
             case 0:{
                 printf("Thoat chuong trinh!\n");
                 break;
@@ -275,6 +272,6 @@ int main() {
             default: printf("Lua chon khong hop le!\n");
         }
     } while (luonChon != 0);
-
+    //Ghi file
     return 0;
 }
