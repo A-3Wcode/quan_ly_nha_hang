@@ -4,7 +4,8 @@ int main() {
     TD td;
     khoiTaoThucDon(&td);
     int luonChon;
-    // Doc file
+    docFileThucDon(&td, "thucdon.txt");
+    
 
     themMonAn(&td, taoMonAn("MA01", "Com Tam", "Mon chinh", 35.0));
     themMonAn(&td, taoMonAn("MA02", "Pho Bo", "Mon chinh", 45.0));
@@ -272,6 +273,7 @@ int main() {
             default: printf("Lua chon khong hop le!\n");
         }
     } while (luonChon != 0);
-    //Ghi file
+    ghiFileThucDon(&td, "thucdon.txt");
+    
     return 0;
 }
