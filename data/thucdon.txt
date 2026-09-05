@@ -1,1 +1,4 @@
-
+MA01,Com Tam,Mon chinh,35
+MA02,Pho Bo,Mon chinh,45
+MA03,Tra Sua,Giai khat,25
+MA04,Bun Ca,Mon chinh,30

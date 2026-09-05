@@ -9,7 +9,6 @@ bool capNhatMonAn(TD *td, char ma[]){
 	
 	MA *mon = timKiemTheoMa(td, ma);
 	if (mon == NULL) {
-        printf("Khong tim thay mon an co ma %s!\n", ma);
         return false;
     }
 	
@@ -27,15 +26,19 @@ bool capNhatMonAn(TD *td, char ma[]){
         printf("0. Hoan tat & Thoat\n");
         printf("Lua chon: ");
 		
-		if (scanf("%d", &choose) != 1) {
-            getchar();
-            continue;
-        }
-        getchar();
+		do{
+            if(scanf("%d", &choose) != 1) {
+                printf("Lua chon khong hop le! Vui long nhap lai: ");
+                while (getchar() != '\n');
+            } else {
+                break;
+            }
+        }while(choose != -1);
         
 		switch(choose){
 			case 1:{
 				printf("Nhap ten mon moi: ");
+                while (getchar() != '\n');
                 fgets(ten, sizeof(ten), stdin);
                 ten[strcspn(ten, "\n")] = '\0';
     			strcpy(mon->Ten, ten);
@@ -44,6 +47,7 @@ bool capNhatMonAn(TD *td, char ma[]){
 			}
 			case 2:{
 				printf("Nhap loai mon moi: ");
+                while (getchar() != '\n');
                 fgets(loai, sizeof(loai), stdin);
                 loai[strcspn(loai, "\n")] = '\0';
                 strcpy(mon->Loai, loai);
@@ -51,33 +55,45 @@ bool capNhatMonAn(TD *td, char ma[]){
                 break;
 			}
 			case 3:{
-				do {
+				while(1){
                     printf("Nhap gia tien moi (>0): ");
-                    scanf("%lf", &gia);
-                    getchar();
-                    if (gia <= 0) printf("Gia phai lon hon 0!\n");
-                }while (gia <= 0);
+                    if(scanf("%lf", &gia) != 1) {
+                        printf("Gia khong hop le! Vui long nhap lai: ");
+                        while (getchar() != '\n');
+                    } else if(gia <= 0) {
+                        printf("Gia phai lon hon 0! Vui long nhap lai.\n");
+                    } else {
+                        break;
+                    }
+                }
                 mon->Gia = gia;
                 printf("Cap nhat Gia thanh cong!\n");
                 break;
 			}
 			case 4:{
 				printf("Nhap ten mon moi: ");
+                while (getchar() != '\n');
                 fgets(ten, sizeof(ten), stdin);
                 ten[strcspn(ten, "\n")] = '\0';
                 strcpy(mon->Ten, ten);
 
                 printf("Nhap loai mon moi: ");
+                while (getchar() != '\n');
                 fgets(loai, sizeof(loai), stdin);
                 loai[strcspn(loai, "\n")] = '\0';
                 strcpy(mon->Loai, loai);
                 
-                do {
+               while(1){
                     printf("Nhap gia tien moi (>0): ");
-                    scanf("%lf", &gia);
-                    getchar();
-                    if (gia <= 0) printf("Gia phai lon hon 0!\n");
-                } while (gia <= 0);
+                    if(scanf("%lf", &gia) != 1) {
+                        printf("Gia khong hop le! Vui long nhap lai: ");
+                        while (getchar() != '\n');
+                    } else if(gia <= 0) {
+                        printf("Gia phai lon hon 0! Vui long nhap lai.\n");
+                    } else {
+                        break;
+                    }
+                }
                 mon->Gia = gia;
 
                 printf("Cap nhat tat ca thong tin thanh cong!\n");

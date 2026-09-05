@@ -106,10 +106,13 @@ bool soSanhMonAn(MA *a, MA *b, int tieuChuan, bool tangDan){
 			break;
 		}
 		case 3:{
+			temp = strcmp(a->Loai, b->Loai);
+			break;
+		}
+		case 4:{
 			if(a->Gia < b->Gia) temp = -1;
 			else if(a->Gia > b->Gia) temp = 1;
 			else temp = 0;
-			break;
 		}
 	}
 	

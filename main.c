@@ -7,10 +7,10 @@ int main() {
     docFileThucDon(&td, "data/thucdon.txt");
     
 
-    themMonAn(&td, taoMonAn("MA01", "Com Tam", "Mon chinh", 35.0));
-    themMonAn(&td, taoMonAn("MA02", "Pho Bo", "Mon chinh", 45.0));
-    themMonAn(&td, taoMonAn("MA03", "Tra Sua", "Giai khat", 25.0));
-    themMonAn(&td, taoMonAn("MA04", "Bun Ca", "Mon chinh", 30.0));
+    // themMonAn(&td, taoMonAn("MA01", "Com Tam", "Mon chinh", 35.0));
+    // themMonAn(&td, taoMonAn("MA02", "Pho Bo", "Mon chinh", 45.0));
+    // themMonAn(&td, taoMonAn("MA03", "Tra Sua", "Giai khat", 25.0));
+    // themMonAn(&td, taoMonAn("MA04", "Bun Ca", "Mon chinh", 30.0));
 
     do {
         printf("\n================ QUAN LY NHA HANG ================\n");
@@ -68,7 +68,9 @@ int main() {
                         case 1:{
                             char timKiemMa[15];
                             printf("Nhap ma mon an can tim: ");
-                            scanf("%s", timKiemMa);
+                            while (getchar() != '\n');
+                            fgets(timKiemMa, sizeof(timKiemMa), stdin);
+                            timKiemMa[strcspn(timKiemMa, "\n")] = '\0';
                             MA* monTimKiem = timKiemTheoMa(&td, timKiemMa);
                             if(monTimKiem != NULL){
                                 printf("Mon an tim thay:\n");
@@ -82,6 +84,7 @@ int main() {
                         case 2:{
                             char timKiemTen[50];
                             printf("Nhap ten mon an can tim: ");
+                            while (getchar() != '\n');
                             fgets(timKiemTen, sizeof(timKiemTen), stdin);
                             timKiemTen[strcspn(timKiemTen, "\n")] = '\0';
                             TD danhSachTimKiem = timKiemTheoTen(&td, timKiemTen);
@@ -91,11 +94,13 @@ int main() {
                             } else {
                                 printf("Khong tim thay mon an voi ten %s\n", timKiemTen);
                             }
+                            break;
                         }
 
                         case 3:{
                             char timKiemLoai[30];
                             printf("Nhap loai mon an can tim: ");
+                            while (getchar() != '\n');
                             fgets(timKiemLoai, sizeof(timKiemLoai), stdin);
                             timKiemLoai[strcspn(timKiemLoai, "\n")] = '\0';
                             TD danhSachTimKiem = timKiemTheoLoai(&td, timKiemLoai);
@@ -105,12 +110,24 @@ int main() {
                             } else {
                                 printf("Khong tim thay mon an voi loai %s\n", timKiemLoai);
                             }
+                            break;
                         }
 
                         case 4:{
                             double giaMin, giaMax;
                             printf("Nhap khoang gia can tim (giaMin giaMax): ");
-                            scanf("%lf %lf", &giaMin, &giaMax);
+                            do{
+                                if(scanf("%lf %lf", &giaMin, &giaMax) != 2) {
+                                    printf("Lua chon khong hop le! Vui long nhap lai: ");
+                                    while (getchar() != '\n');
+                                } else {
+                                    if(giaMin < 0 || giaMax < 0 || giaMin > giaMax) {
+                                        printf("Khoang gia khong hop le! Vui long nhap lai: ");
+                                    } else {
+                                        break;
+                                    }
+                                }
+                            }while(giaMin < 0 || giaMax < 0 || giaMin > giaMax);
                             TD danhSachTimKiem = timKiemTheoKhoangGia(&td, giaMin, giaMax);
                             if(danhSachTimKiem.count > 0){
                                 printf("Danh sach mon an tim thay:\n");
@@ -118,6 +135,7 @@ int main() {
                             } else {
                                 printf("Khong tim thay mon an trong khoang gia %.2f - %.2f\n", giaMin, giaMax);
                             }
+                            break;
                         }
 
                         case 0:{
@@ -128,6 +146,7 @@ int main() {
                         default: printf("Lua chon khong hop le!\n");
                     }
                 }while(timKiemLuaChon != 0);
+                break;
             }
             
             case 4:{
@@ -151,7 +170,9 @@ int main() {
                         case 1:{
                             char xoaMa[15];
                             printf("Nhap ma mon an can xoa: ");
-                            scanf("%s", xoaMa);
+                            while (getchar() != '\n');
+                            fgets(xoaMa, sizeof(xoaMa), stdin);
+                            xoaMa[strcspn(xoaMa, "\n")] = '\0';
                             if(xoaTheoMa(&td, xoaMa)){
                                 printf("Xoa mon an voi ma %s thanh cong!\n", xoaMa);
                             } else {
@@ -163,6 +184,7 @@ int main() {
                         case 2:{
                             char xoaTen[50];
                             printf("Nhap ten mon an can xoa: ");
+                            while (getchar() != '\n');
                             fgets(xoaTen, sizeof(xoaTen), stdin);
                             xoaTen[strcspn(xoaTen, "\n")] = '\0';
                             int soLuongXoa = xoaTheoTen(&td, xoaTen);
@@ -171,6 +193,7 @@ int main() {
                             } else {
                                 printf("Khong tim thay mon an voi ten %s\n", xoaTen);
                             }
+                            break;
                         }
 
                         case 0:{
@@ -182,14 +205,20 @@ int main() {
                     }
 
                 }while(xoaLuaChon != 0);
+                break;
             }
             case 5:{
                 char ma[15];
                 printf("Nhap ma mon an can cap nhat: ");
-                scanf("%s", ma);
-                if(!capNhatMonAn(&td, ma)){
+                while (getchar() != '\n');
+                fgets(ma, sizeof(ma), stdin);
+                ma[strcspn(ma, "\n")] = '\0';
+                if(capNhatMonAn(&td, ma)){
+                    printf("Cap nhat mon an voi ma %s thanh cong!\n", ma);
+                } else {
                     printf("Khong tim thay mon an voi ma %s\n", ma);
                 }
+                break;
             }
             
             case 6:{
@@ -202,7 +231,8 @@ int main() {
                     printf("4. Sap xep theo ten (Giam Dan)\n");
                     printf("5. Sap xep theo loai (Tang Dan)\n");
                     printf("6. Sap xep theo loai (Giam Dan)\n");
-                    printf("7. Sap xep theo gia (Giam Dan)\n");
+                    printf("7. Sap xep theo gia (Tang Dan)\n");
+                    printf("8. Sap xep theo gia (Giam Dan)\n");
                     printf("0. Quay lai menu chinh\n");
                     printf("Nhap lua chon cua ban: ");
                     do{
@@ -262,6 +292,7 @@ int main() {
                         default: printf("Lua chon khong hop le!\n");
                     }
                 }while(sapXepLuaChon != 0);
+                break;
             }
             
             case 7:
