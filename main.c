@@ -20,8 +20,7 @@ int main() {
         printf("4. Xoa mon an\n");
         printf("5. Cap nhat thong tin mon an\n");
         printf("6. Sap xep thuc don\n");
-        printf("7. Doc/Ghi file text\n");
-        printf("8. Quon ly ban an & Thanh toan\n");
+        printf("7. Quon ly ban an & Thanh toan\n");
         printf("0. Thoat chuong trinh\n");
         printf("==================================================\n");
         printf("Nhap lua chon cua ban: ");
