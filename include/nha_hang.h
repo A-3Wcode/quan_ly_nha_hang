@@ -18,6 +18,7 @@ typedef struct MonAn {
 // Struct Danh sach Thuc Don (Danh sach lien ket don)
 typedef struct ThucDon {
     MA* head;
+    MA* tail;
     int count;
 } TD;
 

@@ -409,6 +409,7 @@ int main() {
         }
     } while (luonChon != 0);
     ghiFileThucDon(&td, "data/thucdon.txt");
+    giaiPhongThucDon(&td);
     
     return 0;
 }
