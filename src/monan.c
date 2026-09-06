@@ -1,10 +1,36 @@
 
 #include "../include/nha_hang.h"
+#include <ctype.h>
 /*Thuc hien: Nguyen Tai Nang*/
 // 1. Khoi tao va quan ly bo nho
+bool laChuoiSo(const char *s){
+    if(s == NULL || strlen(s) == 0) return false;
+	for(int i = 0; s[i] != '\0'; i++){
+		if(!isdigit((unsigned char )s[i])){
+			return false;
+		}
+	}
+	return true;
+}
+
+bool TenVaLoaiHopLe(const char *s){
+	if( s == NULL || strlen(s) == 0) return false;
+	bool coKyTu = false;
+	for(int i = 0; s[i] != '\0'; i++){
+		if(isdigit((unsigned char)s[i])){
+			return false;
+		}
+		if(!isspace((unsigned char)s[i])){
+			coKyTu = true;
+		}
+	}
+	return coKyTu;
+}
+
+
 MA* taoMonAn(char ma[], char ten[], char loai[], double gia){
-    MA* mon =(MA*)malloc(sizeof(MA)); // khai bao vung nho cho mon an
-    if(mon == NULL){                    // kiem tra NULL va bao loi
+    MA* mon =(MA*)malloc(sizeof(MA)); 
+    if(mon == NULL){                    
         printf("Loi cap phat bo nho!\n"); 
 		return NULL;
     }
@@ -18,12 +44,12 @@ MA* taoMonAn(char ma[], char ten[], char loai[], double gia){
     mon->Loai[sizeof(mon->Loai) -  1] = '\0';
     
     mon->Gia = gia;
-    mon->next = NULL;           // gan con tro next = NULL vi chua lien ket 
+    mon->next = NULL;          
     return mon;
 }
 
 void khoiTaoThucDon(TD *td){
-    if(td != NULL){     // kiem tra con tro td khac null 
+    if(td != NULL){    
         td->head = NULL;
         td->tail = NULL;
         td->count = 0;
@@ -32,25 +58,25 @@ void khoiTaoThucDon(TD *td){
 void giaiPhongThucDon(TD *td){
 	if(td == NULL) return;
 	
-    MA *current = td->head;             // Bat dau tu nut dau
+    MA *current = td->head;             
     while(current != NULL){
-        MA *temp = current;             // Giu nut hien tai
-        current = current->next;        // Nhay sang nut tiep theo
-        free(temp);                     // Giai phong
+        MA *temp = current;             
+        current = current->next;        
+        free(temp);                     
     }
     td-> head = NULL;  
-	td->tail = NULL;                 // Dat con tro dau danh sach ve NULL
-    td->count = 0;                      // ds rong
+	td->tail = NULL;                 
+    td->count = 0;                     
 }
 
 // 2. Nhap va Them mon
 bool kiemTraTrungMa(TD *td, char ma[]){
     if(td == NULL || td->head == NULL) return false;
-    MA *p = td->head; // con tro p start from head
+    MA *p = td->head;
     while(p != NULL){
-        if(strcmp(p->MaMon, ma) == 0) return true; // da tim thay ma trung 
-        p = p->next;  // chua tim thay ma trung
-    }
+        if(strcmp(p->MaMon, ma) == 0) return true;  
+        p = p->next; 
+	}
     return false;
 }
 
@@ -85,10 +111,15 @@ bool kiemTraMonHopLe(char ma[], char ten[], double gia){
 	return true;
 	
 }
+void xoaBoDem(void){
+	int c;
+	while((c = getchar()) != '\n' && c != EOF);
+}
 void nhapDanhSachMonAn(TD *td){
 	if (td == NULL){
 		return;
 	}
+	
     char tieptuc;
     int i = 0;
         
@@ -99,18 +130,20 @@ void nhapDanhSachMonAn(TD *td){
         
     	do{
             printf("Nhap ma mon an (toi da 14 ky tu): ");
-            fgets(ma, sizeof(ma), stdin);
+            if(fgets(ma, sizeof(ma), stdin) == NULL) continue;
+
             char *pos = strchr(ma, '\n');
             if(pos != NULL){
             	*pos = '\0';
 			}else{
-				int c;
-				while((c = getchar()) != '\n' && c != EOF);
+				xoaBoDem();
 				printf("Loi ky tu vuot qua gioi han cho phep! Xin vui long nhap lai!");
 				continue;
 			}
 			if(strlen(ma) == 0){
 				printf("Ma khong duoc bo trong!\n");
+			}else if(!laChuoiSo(ma)){
+				printf("Ma mon an phai la chuoi so!Vui long nhap lai!\n");
 			}else if(kiemTraTrungMa(td, ma)){
 				printf("Ma mon da ton tai!Vui long nhap la ma.\n");
 			}else{
@@ -120,36 +153,53 @@ void nhapDanhSachMonAn(TD *td){
         
         do{
         	printf("Nhap ten mon an: ");
-        	fgets(ten, sizeof(ten), stdin);
+        	if(fgets(ten, sizeof(ten), stdin) == NULL) continue;
         	
         	char *pos = strchr(ten, '\n');
         	if(pos != NULL){
         		*pos = '\0';
 			}else{
-				int c;
-				while((c = getchar()) != '\n' && c != EOF);
+				xoaBoDem();
 				printf("Loi ky tu qua gioi han cho phep, xin vui long nhap lai!\n");
 				continue;
 			}
 			if(strlen(ten) == 0){
 				printf("Ten mon khong duoc de trong.Vui long nhap lai!\n");
+			}else if(!TenVaLoaiHopLe(ten)){
+				printf("Ten mon khong hop le!Vui long nhap lai!\n");
 			}else{
 				break;
 			}
 		}while(1);
 		
-		printf("Nhap loai mon an: ");
-		fgets(loai, sizeof(loai), stdin);
-		loai[strcspn(loai, "\n")] = '\0';
+		do{
+			printf("Nhap loai mon an: ");
+			if(fgets(loai, sizeof(loai), stdin) == NULL) continue;
+			char *pos = strchr(loai, '\n');
+			if(pos != NULL){
+				*pos = '\0';
+			}else{
+				xoaBoDem();
+				printf("Loi ky tu vuot qua gioi han cho phep! Xin vui long nhap lai!\n");
+				continue;
+			}
+			if(strlen(loai) == 0){
+				printf("Loai mon khong duoc de trong!Vui long nhap lai!\n");
+			}else if(!TenVaLoaiHopLe(loai)){
+				printf("Loai mon khong hop le!Vui long nhap lai!\n");
+			}else{
+				break;
+			}
+		}while(1);
 		
 		do{
 			printf("Nhap gia mon an (>0): ");
 			if(scanf("%lf", &gia) != 1){
 				printf("Loi: Gia tien phai la dinh dang so!Vui long nhap lai!\n");
-				while(getchar() != '\n');
+				xoaBoDem();
 				continue;
 			}
-			getchar();
+			xoaBoDem();
 			
 			if(gia <= 0){
 				printf("Loi: Gia mon phai lon hon 0!Vui long nhap lai.\n");
@@ -172,7 +222,7 @@ void nhapDanhSachMonAn(TD *td){
 		do{
 			printf("\nBan co muon nhap tiep khong? (y/n): ");
 			scanf(" %c", &tieptuc);
-			getchar();
+			while(getchar() != '\n');
 			
 			if(tieptuc == 'y' || tieptuc == 'Y' || tieptuc == 'n' || tieptuc == 'N'){
 				break;
@@ -194,15 +244,15 @@ void hienThiThucDon(TD *td){
         printf("Thuc don hien dang trong!\n");
         return;
     }
-    printf("\n---------------------------DANH SACH THUC DON---------------------------------\n");
+    printf("\n---------------------------DANH SACH THUC DON------------------------------\n");
     printf("| %-12s | %-25s | %-15s | %-10s |\n", "Ma Mon", " Ten","Loai", "Gia");
-    printf("--------------------------------------------------------------------------------\n");
+    printf("---------------------------------------------------------------------------\n");
     MA *p = td->head;
     while(p != NULL){
         hienThiMonAn(p);
         p = p->next;
     }
-    printf("---------------------------------------------------------------------------------\n");
+    printf("---------------------------------------------------------------------------\n");
     printf("Tong so mon an: %d\n", td->count);
 
 }
