@@ -11,6 +11,14 @@ int main() {
     // themMonAn(&td, taoMonAn("MA02", "Pho Bo", "Mon chinh", 45.0));
     // themMonAn(&td, taoMonAn("MA03", "Tra Sua", "Giai khat", 25.0));
     // themMonAn(&td, taoMonAn("MA04", "Bun Ca", "Mon chinh", 30.0));
+    // themMonAn(&td, taoMonAn("MA05", "Bun Cha", "Mon chinh", 35.0));
+    // themMonAn(&td, taoMonAn("MA06", "Com Ga", "Mon chinh", 30.0));
+    // themMonAn(&td, taoMonAn("MA07", "Pho Ga", "Mon chinh", 30.0));
+    // themMonAn(&td, taoMonAn("MA08", "Tra Da", "Gia khat", 5.0));
+    // themMonAn(&td, taoMonAn("MA09", "Bun Dau", "Mon chinh", 80.0));
+    // themMonAn(&td, taoMonAn("MA10", "Banh Chuoi", "Trang mieng", 25.0));
+    // themMonAn(&td, taoMonAn("MA11", "Salad", "Khai vi", 30.0));
+    // themMonAn(&td, taoMonAn("MA12", "Banh My", "Mon phu", 8.0));
 
     do {
         printf("\n================ QUAN LY NHA HANG ================\n");
