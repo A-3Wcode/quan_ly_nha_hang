@@ -4,74 +4,77 @@
 MA* timKiemTheoMa(TD *td, char ma[]){
 	if(td == NULL || td->head == NULL) return NULL;
 	
-	MA* troDuyet = td->head;
-	while(troDuyet != NULL){
+	for(MA* troDuyet = td->head; troDuyet != NULL; troDuyet = troDuyet->next){
 		if(strcmp(troDuyet->MaMon, ma) == 0){
 			return troDuyet;
 		}
-		troDuyet = troDuyet->next;
 	}
 	return NULL;
 }
 
 TD timKiemTheoTen(TD *td, char ten[]){
 	TD ketQua;
-	ketQua.head = NULL;
-	ketQua.count = 0;
+	khoiTaoThucDon(&ketQua);
 	
 	if (td == NULL || td->head == NULL) return ketQua;
 	
 	MA *troDuyet = td->head;
-	while(troDuyet != NULL){
+	for(MA* troDuyet = td->head; troDuyet != NULL; troDuyet = troDuyet->next){
 		if(strstr(troDuyet->Ten, ten) != NULL){
 			MA *monTimThay = taoMonAn(troDuyet->MaMon, 
 				troDuyet->Ten, troDuyet->Loai, troDuyet->Gia);
 				themMonAn(&ketQua, monTimThay);
 		}
-		troDuyet = troDuyet->next;
 	}
 	return ketQua;
 }
 
 TD timKiemTheoLoai(TD *td, char loai[]){
 	TD ketQua;
-	ketQua.head = NULL;
-	ketQua.count = 0;
+	khoiTaoThucDon(&ketQua);
 	
 	if (td == NULL || td->head == NULL) return ketQua;
 	
-	MA *troDuyet = td->head;
-	while(troDuyet != NULL){
-		if(strstr(troDuyet->Loai, loai) != NULL){
+	for(MA* troDuyet = td->head; troDuyet != NULL; troDuyet = troDuyet->next){
+		if(strcmp(troDuyet->Loai, loai) == 0){
 			MA *monTimThay = taoMonAn(troDuyet->MaMon, 
 				troDuyet->Ten, troDuyet->Loai, troDuyet->Gia);
 				themMonAn(&ketQua, monTimThay);
 		}
-		troDuyet = troDuyet->next;
 	}
 	return ketQua;
 }
 
 TD timKiemTheoKhoangGia(TD *td, double giaMin, double giaMax){
 	TD ketQua;
-	ketQua.head = NULL;
-	ketQua.count = 0;
+	khoiTaoThucDon(&ketQua);
 	
 	if (td == NULL || td->head == NULL) return ketQua;
 	
-	MA *troDuyet = td->head;
-	while(troDuyet != NULL){
+	for(MA* troDuyet = td->head; troDuyet != NULL; troDuyet = troDuyet->next){
 		if(troDuyet->Gia >= giaMin && troDuyet->Gia <= giaMax){
 			MA *monTimThay = taoMonAn(troDuyet->MaMon, 
 				troDuyet->Ten, troDuyet->Loai, troDuyet->Gia);
 				themMonAn(&ketQua, monTimThay);
 		}
-		troDuyet = troDuyet->next;
 	}
 	return ketQua;
 }
 
 // 6. Sap xep
+void capNhatTail(TD *td) {
+	if(td == NULL || td->head == NULL) {
+		td->tail = NULL;
+		return;
+	}
+	
+	MA *current = td->head;
+	while(current->next != NULL) {
+		current = current->next;
+	}
+	td->tail = current;
+}
+
 void chiaDoiDanhSach(MA *mon, MA **dsTruoc, MA **dsSau){
 	if(mon == NULL || mon->next == NULL){
 		return;
@@ -123,22 +126,31 @@ MA* tron2DanhSach(MA *a, MA *b, int tieuChuan, bool tangDan){
 	if(a == NULL) return b;
 	if(b == NULL) return a;
 	
-	MA *ketQua = NULL;
-	
-	if(soSanhMonAn(a, b, tieuChuan, tangDan)){
-		ketQua = a;
-		ketQua->next = tron2DanhSach(a->next, b, tieuChuan, tangDan);	
-	}else{
-		ketQua = b;
-		ketQua->next = tron2DanhSach(a, b->next, tieuChuan, tangDan);
+	MA mocGia;
+	MA *tail = &mocGia;
+	mocGia.next = NULL;
+
+	while(a != NULL && b != NULL){
+		if(soSanhMonAn(a, b, tieuChuan, tangDan)){
+			tail->next = a;
+			a = a->next;
+		}else{
+			tail->next = b;
+			b = b->next;
+		}
+		tail = tail->next;
 	}
+
+	if(a != NULL) tail->next = a;
+	else tail->next = b;
 	
-	return ketQua;
+	return mocGia.next;
 }
 
 void mergeSort(MA **headRef, int tieuChuan, bool tangDan){
+	if(headRef == NULL ||  *headRef == NULL || (*headRef)->next == NULL) return;
+
 	MA *head = *headRef;
-	if(head == NULL || head->next == NULL) return;
 	MA *a = NULL, *b = NULL;
 	
 	chiaDoiDanhSach(head, &a, &b);
@@ -153,19 +165,23 @@ void mergeSort(MA **headRef, int tieuChuan, bool tangDan){
 void sapXepTheoMa(TD *td, bool tangDan) {
     if(td == NULL || td->head == NULL) return;
     mergeSort(&(td->head), 1, tangDan);
+	capNhatTail(td);
 }
 
 void sapXepTheoTen(TD *td, bool tangDan) {
     if(td == NULL || td->head == NULL) return;
     mergeSort(&(td->head), 2, tangDan);
+	capNhatTail(td);
 }
 
 void sapXepTheoLoai(TD *td, bool tangDan) {
 	if(td == NULL || td->head == NULL) return;
 	mergeSort(&(td->head), 3, tangDan);
+	capNhatTail(td);
 }
 
 void sapXepTheoGia(TD *td, bool tangDan) {
     if(td == NULL || td->head == NULL) return;
     mergeSort(&(td->head), 4, tangDan);
+	capNhatTail(td);
 }

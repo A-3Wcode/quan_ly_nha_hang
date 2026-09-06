@@ -103,6 +103,7 @@ int main() {
                             } else {
                                 printf("Khong tim thay mon an voi ten %s\n", timKiemTen);
                             }
+                            giaiPhongThucDon(&danhSachTimKiem);
                             break;
                         }
 
@@ -119,31 +120,34 @@ int main() {
                             } else {
                                 printf("Khong tim thay mon an voi loai %s\n", timKiemLoai);
                             }
+                            giaiPhongThucDon(&danhSachTimKiem);
                             break;
                         }
 
                         case 4:{
                             double giaMin, giaMax;
+                            bool hopLe = false;
                             printf("Nhap khoang gia can tim (giaMin giaMax): ");
                             do{
                                 if(scanf("%lf %lf", &giaMin, &giaMax) != 2) {
                                     printf("Lua chon khong hop le! Vui long nhap lai: ");
                                     while (getchar() != '\n');
+                                } else if(giaMin < 0 || giaMax < 0 || giaMin > giaMax) {
+                                    printf("Khoang gia khong hop le! Vui long nhap lai: ");
                                 } else {
-                                    if(giaMin < 0 || giaMax < 0 || giaMin > giaMax) {
-                                        printf("Khoang gia khong hop le! Vui long nhap lai: ");
-                                    } else {
-                                        break;
-                                    }
+                                    hopLe = true;
                                 }
-                            }while(giaMin < 0 || giaMax < 0 || giaMin > giaMax);
+                            }while(!hopLe);
+
                             TD danhSachTimKiem = timKiemTheoKhoangGia(&td, giaMin, giaMax);
+
                             if(danhSachTimKiem.count > 0){
                                 printf("Danh sach mon an tim thay:\n");
                                 hienThiThucDon(&danhSachTimKiem);
                             } else {
                                 printf("Khong tim thay mon an trong khoang gia %.2f - %.2f\n", giaMin, giaMax);
                             }
+                            giaiPhongThucDon(&danhSachTimKiem);
                             break;
                         }
 
@@ -244,14 +248,16 @@ int main() {
                     printf("8. Sap xep theo gia (Giam Dan)\n");
                     printf("0. Quay lai menu chinh\n");
                     printf("Nhap lua chon cua ban: ");
+                    
+                    int hopLe = 0;
                     do{
                         if(scanf("%d", &sapXepLuaChon) != 1) {
                             printf("Lua chon khong hop le! Vui long nhap lai: ");
                             while (getchar() != '\n');
                         } else {
-                            break;
+                            hopLe = 1;
                         }
-                    }while(sapXepLuaChon != -1);
+                    }while(!hopLe);
 
                     switch (sapXepLuaChon){
                         case 1:{

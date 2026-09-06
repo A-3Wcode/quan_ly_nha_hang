@@ -22,19 +22,18 @@ bool capNhatMonAn(TD *td, char ma[]){
         printf("1. Cap nhat Ten mon\n");
         printf("2. Cap nhat Loai mon\n");
         printf("3. Cap nhat Gia tien\n");
-        printf("4. Cap nhat Tat ca\n");
         printf("0. Hoan tat & Thoat\n");
         printf("Lua chon: ");
-		
-		do{
+		int hopLe = 0;
+        do{
             if(scanf("%d", &choose) != 1) {
                 printf("Lua chon khong hop le! Vui long nhap lai: ");
                 while (getchar() != '\n');
             } else {
-                break;
+                hopLe = 1;
             }
-        }while(choose != -1);
-        
+        }while(!hopLe);
+		
 		switch(choose){
 			case 1:{
 				printf("Nhap ten mon moi: ");
@@ -55,50 +54,22 @@ bool capNhatMonAn(TD *td, char ma[]){
                 break;
 			}
 			case 3:{
-				while(1){
-                    printf("Nhap gia tien moi (>0): ");
-                    if(scanf("%lf", &gia) != 1) {
-                        printf("Gia khong hop le! Vui long nhap lai: ");
+				int hopLeGia = 0;
+                do{
+                    printf("Nhap gia tien moi: ");
+                    if(scanf("%lf", &gia) != 1 || gia < 0) {
+                        printf("Gia tien khong hop le! Vui long nhap lai.\n");
                         while (getchar() != '\n');
-                    } else if(gia <= 0) {
-                        printf("Gia phai lon hon 0! Vui long nhap lai.\n");
                     } else {
-                        break;
+                        hopLeGia = 1;
                     }
-                }
+                }while(!hopLeGia);
+                
                 mon->Gia = gia;
                 printf("Cap nhat Gia thanh cong!\n");
                 break;
 			}
-			case 4:{
-				printf("Nhap ten mon moi: ");
-                while (getchar() != '\n');
-                fgets(ten, sizeof(ten), stdin);
-                ten[strcspn(ten, "\n")] = '\0';
-                strcpy(mon->Ten, ten);
-
-                printf("Nhap loai mon moi: ");
-                while (getchar() != '\n');
-                fgets(loai, sizeof(loai), stdin);
-                loai[strcspn(loai, "\n")] = '\0';
-                strcpy(mon->Loai, loai);
-                
-               while(1){
-                    printf("Nhap gia tien moi (>0): ");
-                    if(scanf("%lf", &gia) != 1) {
-                        printf("Gia khong hop le! Vui long nhap lai: ");
-                        while (getchar() != '\n');
-                    } else if(gia <= 0) {
-                        printf("Gia phai lon hon 0! Vui long nhap lai.\n");
-                    } else {
-                        break;
-                    }
-                }
-                mon->Gia = gia;
-
-                printf("Cap nhat tat ca thong tin thanh cong!\n");
-                break;
-			}
+			
 			case 0:{
 				printf("Thoat cap nhat mon!\n");
 				break;
@@ -114,13 +85,18 @@ bool capNhatMonAn(TD *td, char ma[]){
 }
 
 bool xoaTheoMa(TD *td, char ma[]){
-	if(td == NULL || td->head == NULL) return NULL;
+	if(td == NULL || td->head == NULL) return false;
 	
 	MA *current = td->head;
 	MA *truoc = NULL;
 	
 	if(strcmp(current->MaMon, ma) == 0){
 		td->head = current->next;
+
+        if(td->head == NULL) {
+            td->tail = NULL; 
+        }
+
 		free(current);
 		td->count--;
 		return true;
@@ -134,6 +110,11 @@ bool xoaTheoMa(TD *td, char ma[]){
 	if(current == NULL) return false;
 
     truoc->next = current->next;
+
+    if(current == td->tail) {
+        td->tail = truoc; 
+    }
+
     free(current);
     td->count--;
 
@@ -158,6 +139,11 @@ int xoaTheoTen(TD *td, char ten[]){
                 truoc->next = current->next;
                 current = current->next;
             }
+
+            if(temp == td->tail){
+                td->tail = truoc;
+            }
+
 	        free(temp);
 	        td->count--;
 	        soLuongDaXoa++;
@@ -166,5 +152,10 @@ int xoaTheoTen(TD *td, char ten[]){
             current = current->next;
         }
     }
+
+    if(td->head == NULL){
+        td->tail = NULL;
+    }
+
     return soLuongDaXoa;
 }
