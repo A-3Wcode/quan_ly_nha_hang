@@ -36,6 +36,7 @@ int main() {
 
         switch (luonChon) {
             case 1:{
+                xoaBoDem();
                 nhapDanhSachMonAn(&td);
                 break;
             }
