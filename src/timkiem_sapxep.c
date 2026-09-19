@@ -18,7 +18,6 @@ TD timKiemTheoTen(TD *td, char ten[]){
 	
 	if (td == NULL || td->head == NULL) return ketQua;
 	
-	MA *troDuyet = td->head;
 	for(MA* troDuyet = td->head; troDuyet != NULL; troDuyet = troDuyet->next){
 		if(strstr(troDuyet->Ten, ten) != NULL){
 			MA *monTimThay = taoMonAn(troDuyet->MaMon, 

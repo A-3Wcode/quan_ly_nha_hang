@@ -36,9 +36,12 @@ typedef struct Ban {
 MA* taoMonAn(char ma[], char ten[], char loai[], double gia);
 void khoiTaoThucDon(TD *td);
 void giaiPhongThucDon(TD *td);
+
+// Ham phu
 bool laChuoiSo(const char *s);
-bool TenVaLoaiHopLe(const char *s);
 void xoaBoDem(void);
+bool TenVaLoaiHopLe(const char *s);
+
 // 2. Nhap va Them mon
 bool kiemTraTrungMa(TD *td, char ma[]);
 bool kiemTraMonHopLe(char ma[], char ten[], double gia);
