@@ -152,10 +152,5 @@ int xoaTheoTen(TD *td, char ten[]){
             current = current->next;
         }
     }
-
-    if(td->head == NULL){
-        td->tail = NULL;
-    }
-
     return soLuongDaXoa;
 }

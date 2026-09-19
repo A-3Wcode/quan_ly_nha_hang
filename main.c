@@ -71,7 +71,7 @@ int main() {
                         } else {
                             break;
                         }
-                    }while(timKiemLuaChon != -1);
+                    }while(1);
 
                     switch(timKiemLuaChon){
                         case 1:{
@@ -145,7 +145,7 @@ int main() {
                                 printf("Danh sach mon an tim thay:\n");
                                 hienThiThucDon(&danhSachTimKiem);
                             } else {
-                                printf("Khong tim thay mon an trong khoang gia %.2f - %.2f\n", giaMin, giaMax);
+                                printf("Khong tim thay mon an trong khoang gia %.2f - %.2f\n", giaMin, giaMax); //----------------------------------------------------------------
                             }
                             giaiPhongThucDon(&danhSachTimKiem);
                             break;
@@ -220,6 +220,7 @@ int main() {
                 }while(xoaLuaChon != 0);
                 break;
             }
+
             case 5:{
                 char ma[15];
                 printf("Nhap ma mon an can cap nhat: ");
