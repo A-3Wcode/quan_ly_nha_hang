@@ -145,7 +145,7 @@ int main() {
                                 printf("Danh sach mon an tim thay:\n");
                                 hienThiThucDon(&danhSachTimKiem);
                             } else {
-                                printf("Khong tim thay mon an trong khoang gia %.2f - %.2f\n", giaMin, giaMax); //----------------------------------------------------------------
+                                printf("Khong tim thay mon an trong khoang gia %.2f - %.2f\n", giaMin, giaMax); 
                             }
                             giaiPhongThucDon(&danhSachTimKiem);
                             break;

@@ -62,18 +62,20 @@ TD timKiemTheoKhoangGia(TD *td, double giaMin, double giaMax);
 bool xoaTheoMa(TD *td, char ma[]);
 int xoaTheoTen(TD *td, char ten[]);
 
-// 6. Cap nhat va Sap xep
+// 6. Cap nhat
 bool capNhatMonAn(TD *td, char ma[]);
+
+// 7. Sap xep
 void sapXepTheoMa(TD *td, bool tangDan);
 void sapXepTheoTen(TD *td, bool tangDan);
 void sapXepTheoLoai(TD *td, bool tangDan);
 void sapXepTheoGia(TD *td, bool tangDan);
 
-// 7. Doc va Ghi file text
+// 8. Doc va Ghi file text
 bool ghiFileThucDon(TD *td, char tenFile[]);
 bool docFileThucDon(TD *td, char tenFile[]);
 
-// 8. Quan ly Ban an & Thanh toan
+// 9. Quan ly Ban an & Thanh toan
 void khoiTaoBan(Ban *ban, int soBan);
 bool goiMon(Ban *ban, MA *mon);
 double tinhTongTien(Ban *ban);
