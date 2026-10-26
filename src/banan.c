@@ -8,7 +8,7 @@ void khoiTaoBan(Ban *ban, int soBan)
     ban->HoaDon= NULL;
     ban->TongHoaDon = 0;
 }
-bool goiMon(Ban*ban, MA*mon)
+bool goiMon(Ban*ban, const MA*mon)
 {
     if (ban == NULL || mon == NULL)
         return false;

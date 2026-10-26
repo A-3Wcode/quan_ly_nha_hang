@@ -1,7 +1,7 @@
 #include "../include/nha_hang.h"
 
 // 4. Tim kiem
-MA* timKiemTheoMa(TD *td, char ma[]){
+MA* timKiemTheoMa(const TD *td, const char ma[]){
 	if(td == NULL || td->head == NULL) return NULL;
 	
 	for(MA* troDuyet = td->head; troDuyet != NULL; troDuyet = troDuyet->next){
@@ -12,7 +12,7 @@ MA* timKiemTheoMa(TD *td, char ma[]){
 	return NULL;
 }
 
-TD timKiemTheoTen(TD *td, char ten[]){
+TD timKiemTheoTen(const TD *td, const char ten[]){
 	TD ketQua;
 	khoiTaoThucDon(&ketQua);
 	
@@ -28,7 +28,7 @@ TD timKiemTheoTen(TD *td, char ten[]){
 	return ketQua;
 }
 
-TD timKiemTheoLoai(TD *td, char loai[]){
+TD timKiemTheoLoai(const TD *td, const char loai[]){
 	TD ketQua;
 	khoiTaoThucDon(&ketQua);
 	
@@ -44,7 +44,7 @@ TD timKiemTheoLoai(TD *td, char loai[]){
 	return ketQua;
 }
 
-TD timKiemTheoKhoangGia(TD *td, double giaMin, double giaMax){
+TD timKiemTheoKhoangGia(const TD *td, double giaMin, double giaMax){
 	TD ketQua;
 	khoiTaoThucDon(&ketQua);
 	

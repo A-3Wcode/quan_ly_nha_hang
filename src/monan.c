@@ -28,7 +28,7 @@ bool TenVaLoaiHopLe(const char *s){
 }
 
 
-MA* taoMonAn(char ma[], char ten[], char loai[], double gia){
+MA* taoMonAn(const char ma[], const char ten[], const char loai[], double gia){
     MA* mon =(MA*)malloc(sizeof(MA)); 
     if(mon == NULL){                    
         printf("Loi cap phat bo nho!\n"); 
@@ -70,7 +70,7 @@ void giaiPhongThucDon(TD *td){
 }
 
 // 2. Nhap va Them mon
-bool kiemTraTrungMa(TD *td, char ma[]){
+bool kiemTraTrungMa(const TD *td, const char ma[]){
     if(td == NULL || td->head == NULL) return false;
     MA *p = td->head;
     while(p != NULL){
@@ -95,7 +95,7 @@ bool themMonAn(TD *td, MA *monMoi){
     return true;
 }
 
-bool kiemTraMonHopLe(char ma[], char ten[], double gia){
+bool kiemTraMonHopLe(const char ma[], const char ten[], double gia){
 	if(ma == NULL || strlen(ma) == 0 || strlen(ma) >= 15){
 		printf("Loi ky tu vuot qua gioi han cho phep, xin vui long nhap lai!\n");
 		return false;
@@ -235,11 +235,11 @@ void nhapDanhSachMonAn(TD *td){
 }
 
 // 3. Hien thi
-void hienThiMonAn(MA *mon){
+void hienThiMonAn(const MA *mon){
     if(mon == NULL) return;
     printf("| %-12s | %-25s | %-15s | %-10.2f |\n", mon->MaMon, mon->Ten, mon->Loai, mon->Gia);
 }
-void hienThiThucDon(TD *td){
+void hienThiThucDon(const TD *td){
     if(td == NULL || td->head == NULL){
         printf("Thuc don hien dang trong!\n");
         return;

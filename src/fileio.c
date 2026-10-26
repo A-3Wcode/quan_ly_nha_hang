@@ -1,6 +1,6 @@
 #include "../include/nha_hang.h"
 /*Thuc hien: Tran Pham Vinh Quang*/
-bool ghiFileThucDon(TD* td, char tenFile[])
+bool ghiFileThucDon(const TD* td, const char tenFile[])
 {
     FILE* f = fopen(tenFile, "w");
     if (f == NULL)
@@ -14,14 +14,14 @@ bool ghiFileThucDon(TD* td, char tenFile[])
     fclose(f);
     return true;
 }
-bool docFileThucDon(TD* td, char tenFile[])
+bool docFileThucDon(TD* td, const char tenFile[])
 {
     FILE* f = fopen(tenFile, "r");
     if (f == NULL)
         return false;
-    char ma[15], ten[50], loai[50];
+    char ma[15], ten[50], loai[30];
     double gia;
-        while (fscanf(f, "%14[^,],%49[^,],%49[^,],%lf\n", ma, ten, loai, &gia) == 4)
+    while (fscanf(f, "%14[^,],%49[^,],%29[^,],%lf\n", ma, ten, loai, &gia) == 4)
     {
         MA* monMoi = taoMonAn(ma, ten, loai, gia);
         themMonAn(td, monMoi);

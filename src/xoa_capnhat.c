@@ -1,7 +1,7 @@
 #include "../include/nha_hang.h"
 
 // 5. Cap nhat va Xoa phan tu
-bool capNhatMonAn(TD *td, char ma[]){
+bool capNhatMonAn(TD *td, const char ma[]){
 	if (td == NULL || td->head == NULL) {
         printf("Thuc don rong!\n");
         return false;
@@ -84,7 +84,7 @@ bool capNhatMonAn(TD *td, char ma[]){
 	return true;
 }
 
-bool xoaTheoMa(TD *td, char ma[]){
+bool xoaTheoMa(TD *td, const char ma[]){
 	if(td == NULL || td->head == NULL) return false;
 	
 	MA *current = td->head;
@@ -121,7 +121,7 @@ bool xoaTheoMa(TD *td, char ma[]){
     return true;
 }
 
-int xoaTheoTen(TD *td, char ten[]){
+int xoaTheoTen(TD *td, const char ten[]){
     if(td == NULL || td->head == NULL) return 0;
 
     int soLuongDaXoa = 0;
