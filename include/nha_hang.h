@@ -5,79 +5,81 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <ctype.h>
 
-// Struct Khai bao Mon An
+// 1. CÁC CẤU TRÚC DỮ LIỆU CƠ BẢN
+
+// Struct MonAn (Nút danh sách liên kết đơn món ăn)
 typedef struct MonAn {
-    char MaMon[15];         // Ma mon (Duy nhat)
-    char Ten[50];           // Ten mon
-    char Loai[30];          // Loai mon (Khai vi, Mon chinh, Do uong,...)
-    double Gia;             // Gia tien
-    struct MonAn* next;     // Con tro den mon tiep theo
+    char MaMon[15];         // Mã món ăn (duy nhất)
+    char Ten[50];           // Tên món ăn
+    char Loai[30];          // Loại món (Khai vị, Món chính, Đồ uống...)
+    double Gia;             // Giá tiền
+    struct MonAn* next;     // Con trỏ đến món kế tiếp
 } MA;
 
-// Struct Danh sach Thuc Don (Danh sach lien ket don)
+// Struct ThucDon (Quản lý Danh sách liên kết đơn)
 typedef struct ThucDon {
-    MA* head;
-    MA* tail;
-    int count;
+    MA* head;               // Con trỏ đầu danh sách
+    MA* tail;               // Con trỏ cuối danh sách
+    int count;              // Số lượng món trong thực đơn
 } TD;
 
-// Struct Quan ly Ban An
+// Struct Ban (Quản lý bàn ăn và hóa đơn)
 typedef struct Ban {
-    int SoBan;              // So ban
-    bool TrangThai;         // true: Co khach, false: Trong
-    MA* HoaDon;             // Danh sach mon ban da goi
-    double TongHoaDon;      // Tong tien bill
+    int SoBan;              // Số thứ tự bàn
+    bool TrangThai;         // true: Có khách | false: Bàn trống
+    MA* HoaDon;             // Danh sách liên kết món bàn đã gọi
+    double TongHoaDon;      // Tổng tiền hiện tại của bàn
 } Ban;
 
-// === KHAI BÁO PROTOTYPE HÀM ===
 
-// 1. Khoi tao va Quan ly bo nho
-MA* taoMonAn(char ma[], char ten[], char loai[], double gia);
+// 2. KHAI BÁO CÁC HÀM CƠ BẢN
+
+// Khởi tạo & Quản lý bộ nhớ
+MA* taoMonAn(const char ma[], const char ten[], const char loai[], double gia);
 void khoiTaoThucDon(TD *td);
 void giaiPhongThucDon(TD *td);
 
-// Ham phu
+// Hàm bổ trợ nhập liệu & kiểm tra
 bool laChuoiSo(const char *s);
 void xoaBoDem(void);
 bool TenVaLoaiHopLe(const char *s);
+bool kiemTraMonHopLe(const char ma[], const char ten[], double gia);
 
-// 2. Nhap va Them mon
-bool kiemTraTrungMa(TD *td, char ma[]);
-bool kiemTraMonHopLe(char ma[], char ten[], double gia);
+// Nhập & Thêm món (CRUD)
+bool kiemTraTrungMa(const TD *td, const char ma[]);
 bool themMonAn(TD *td, MA *monMoi);
 void nhapDanhSachMonAn(TD *td);
 
-// 3. Hien thi
-void hienThiMonAn(MA *mon);
-void hienThiThucDon(TD *td);
+// Hiển thị dữ liệu
+void hienThiMonAn(const MA *mon);
+void hienThiThucDon(const TD *td);
 
-// 4. Tim kiem
-MA* timKiemTheoMa(TD *td, char ma[]);
-TD timKiemTheoTen(TD *td, char ten[]);
-TD timKiemTheoLoai(TD *td, char loai[]);
-TD timKiemTheoKhoangGia(TD *td, double giaMin, double giaMax);
+// Tìm kiếm
+MA* timKiemTheoMa(const TD *td, const char ma[]);
+TD timKiemTheoTen(const TD *td, const char ten[]);
+TD timKiemTheoLoai(const TD *td, const char loai[]);
+TD timKiemTheoKhoangGia(const TD *td, double giaMin, double giaMax);
 
-// 5. Xoa phan tu
-bool xoaTheoMa(TD *td, char ma[]);
-int xoaTheoTen(TD *td, char ten[]);
+// Xóa & Cập nhật
+bool xoaTheoMa(TD *td, const char ma[]);
+int xoaTheoTen(TD *td, const char ten[]);
+bool capNhatMonAn(TD *td, const char ma[]);
 
-// 6. Cap nhat
-bool capNhatMonAn(TD *td, char ma[]);
-
-// 7. Sap xep
+// Sắp xếp (Thuật toán Merge Sort)
 void sapXepTheoMa(TD *td, bool tangDan);
 void sapXepTheoTen(TD *td, bool tangDan);
 void sapXepTheoLoai(TD *td, bool tangDan);
 void sapXepTheoGia(TD *td, bool tangDan);
 
-// 8. Doc va Ghi file text
-bool ghiFileThucDon(TD *td, char tenFile[]);
-bool docFileThucDon(TD *td, char tenFile[]);
+// Đọc & Ghi File Text
+bool ghiFileThucDon(const TD *td, const char tenFile[]);
+bool docFileThucDon(TD *td, const char tenFile[]);
 
-// 9. Quan ly Ban an & Thanh toan
+// Quản lý Bàn ăn & Thanh toán
 void khoiTaoBan(Ban *ban, int soBan);
-bool goiMon(Ban *ban, MA *mon);
+bool goiMon(Ban *ban, const MA *mon);
 double tinhTongTien(Ban *ban);
 void thanhToanBan(Ban *ban);
 
