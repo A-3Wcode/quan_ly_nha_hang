@@ -30,7 +30,8 @@ typedef struct StackUndo {
 
 void khoiTaoStack(StackUndo* stack);
 bool pushUndo(StackUndo* stack, LoaiUndo loai, const MA* monAnCu, const MA* monAnMoi);
-bool thucHienUndo(TD* td, StackUndo* stack);
+bool thucHienUndo(TD* td, StackUndo* stackUndo, StackUndo* stackRedo);
+bool thucHienRedo(TD* td, StackUndo* stackRedo, StackUndo* stackUndo);
 void giaiPhongStack(StackUndo* stack);
 
 
@@ -113,4 +114,5 @@ void hienThiLichSu(const LichSuLog* logList);
 bool xuatLogRaFile(const LichSuLog* logList, const char tenFile[]);
 void giaiPhongLichSu(LichSuLog* logList);
 
+extern StackUndo undoStack, redoStack;
 #endif

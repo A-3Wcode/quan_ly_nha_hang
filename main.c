@@ -1,9 +1,11 @@
 #include "include/nha_hang.h"
 #include "include/nang_cao.h"
-
+StackUndo undoStack, redoStack;
 int main() {
     TD td;
     khoiTaoThucDon(&td);
+    khoiTaoStack(&undoStack);
+    khoiTaoStack(&redoStack);
     int luonChon;
     docFileThucDon(&td, "data/thucdon.txt");
     
@@ -36,10 +38,11 @@ int main() {
         printf("| 7. Quan ly ban an va thanh toan                      |\n");
         printf("| CHUC NANG NANG CAO                                   |\n");
         printf("| 8. Hoan tac thao tac                                 |\n");
-        printf("| 9. Hang doi che bien                                 |\n");
-        printf("| 10. Tim kiem bang cay AVL                            |\n");
-        printf("| 11. Thong ke                                         |\n");
-        printf("| 12. Lich su thao tac                                 |\n");
+        printf("| 9. REDO THAO TAC                                 |\n");
+        printf("| 10. Hang doi che bien                                 |\n");
+        printf("| 11. Tim kiem bang cay AVL                            |\n");
+        printf("| 12. Thong ke                                         |\n");
+        printf("| 13. Lich su thao tac                                 |\n");
         printf("| 0. Thoat chuong trinh                                |\n");
         printf("+------------------------------------------------------+\n");
         printf("Nhap lua chon cua ban: ");
@@ -463,13 +466,14 @@ int main() {
                 break;
             }
 
-            case 8: {
-                printf("Chuc nang hoan tac chua duoc trien khai!\n");
+           case 8: {
+                printf("\n====== UNDO THAO TAC ======\n");
+                thucHienUndo(&td, &undoStack, &redoStack);
                 break;
             }
-
             case 9: {
-                printf("Chuc nang hang doi che bien chua duoc trien khai!\n");
+                printf("\n====== REDO THAO TAC ======\n");
+                thucHienRedo(&td, &redoStack, &undoStack);
                 break;
             }
 
@@ -500,6 +504,8 @@ int main() {
     } while (luonChon != 0);
     ghiFileThucDon(&td, "data/thucdon.txt");
     giaiPhongThucDon(&td);
+    giaiPhongStack(&undoStack);
+    giaiPhongStack(&redoStack);
     
     return 0;
 }

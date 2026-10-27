@@ -1,5 +1,5 @@
 #include "../include/nha_hang.h"
-
+#include "../include/nang_cao.h"
 // 5. Cap nhat va Xoa phan tu
 bool capNhatMonAn(TD *td, const char ma[]){
 	if (td == NULL || td->head == NULL) {
@@ -11,7 +11,7 @@ bool capNhatMonAn(TD *td, const char ma[]){
 	if (mon == NULL) {
         return false;
     }
-	
+	MA monAnCu = *mon;
 	char ten[50];
 	char loai[30];
 	double gia;
@@ -80,7 +80,15 @@ bool capNhatMonAn(TD *td, const char ma[]){
 			}   
 		}
 	}while(choose != 0);
-	
+	MA monAnMoi = *mon;
+    // Kiểm tra xem dữ liệu có thực sự bị thay đổi không, tránh lưu Undo rác nếu người dùng chỉ vào xem rồi thoát
+    if (strcmp(monAnCu.Ten, monAnMoi.Ten) != 0 || 
+        strcmp(monAnCu.Loai, monAnMoi.Loai) != 0 || 
+        monAnCu.Gia != monAnMoi.Gia) {
+        
+        pushUndo(&undoStack, UNDO_SUA, &monAnCu, &monAnMoi);
+        giaiPhongStack(&redoStack);
+    }
 	return true;
 }
 
@@ -96,6 +104,8 @@ bool xoaTheoMa(TD *td, const char ma[]){
         if(td->head == NULL) {
             td->tail = NULL; 
         }
+        pushUndo(&undoStack, UNDO_XOA, current, NULL); 
+        giaiPhongStack(&redoStack);
 
 		free(current);
 		td->count--;

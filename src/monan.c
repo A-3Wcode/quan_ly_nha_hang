@@ -1,5 +1,6 @@
 
 #include "../include/nha_hang.h"
+#include "../include/nang_cao.h"
 #include <ctype.h>
 /*Thuc hien: Nguyen Tai Nang*/
 // 1. Khoi tao va quan ly bo nho
@@ -216,6 +217,10 @@ void nhapDanhSachMonAn(TD *td){
             	free(monMoi);
 			}else{
 				printf("Them mon an thanh cong!\n");
+
+				pushUndo(&undoStack, UNDO_THEM, NULL, monMoi);
+                giaiPhongStack(&redoStack);
+
 				i++;
 			}
         }
