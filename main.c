@@ -1,4 +1,5 @@
 #include "include/nha_hang.h"
+#include "include/nang_cao.h"
 
 int main() {
     TD td;
@@ -21,16 +22,26 @@ int main() {
     // themMonAn(&td, taoMonAn("MA12", "Banh My", "Mon phu", 8.0));
 
     do {
-        printf("\n================ QUAN LY NHA HANG ================\n");
-        printf("1. Nhap/Them mon an moi\n");
-        printf("2. Hien thi danh sach thuc don\n");
-        printf("3. Tim kiem mon an\n");
-        printf("4. Xoa mon an\n");
-        printf("5. Cap nhat thong tin mon an\n");
-        printf("6. Sap xep thuc don\n");
-        printf("7. Quon ly ban an & Thanh toan\n");
-        printf("0. Thoat chuong trinh\n");
-        printf("==================================================\n");
+        printf("\n+------------------------------------------------------+\n");
+        printf("|                QUAN LY NHA HANG                      |\n");
+        printf("+------------------------------------------------------+\n");
+        printf("| QUAN LY THUC DON                                     |\n");
+        printf("| 1. Nhap/them mon an moi                              |\n");
+        printf("| 2. Hien thi danh sach thuc don                       |\n");
+        printf("| 3. Tim kiem mon an                                   |\n");
+        printf("| 4. Xoa mon an                                        |\n");
+        printf("| 5. Cap nhat thong tin mon an                         |\n");
+        printf("| 6. Sap xep thuc don                                  |\n");
+        printf("| QUAN LY BAN AN                                       |\n");
+        printf("| 7. Quan ly ban an va thanh toan                      |\n");
+        printf("| CHUC NANG NANG CAO                                   |\n");
+        printf("| 8. Hoan tac thao tac                                 |\n");
+        printf("| 9. Hang doi che bien                                 |\n");
+        printf("| 10. Tim kiem bang cay AVL                            |\n");
+        printf("| 11. Thong ke                                         |\n");
+        printf("| 12. Lich su thao tac                                 |\n");
+        printf("| 0. Thoat chuong trinh                                |\n");
+        printf("+------------------------------------------------------+\n");
         printf("Nhap lua chon cua ban: ");
 
         do {
@@ -43,18 +54,18 @@ int main() {
         } while(luonChon != -1);
 
         switch (luonChon) {
-            case 1:{
+            case 1: {
                 xoaBoDem();
                 nhapDanhSachMonAn(&td);
                 break;
             }
-            
-            case 2:{
+
+            case 2: {
                 hienThiThucDon(&td);
-            	break;
+                break;
             }
-            
-            case 3:{
+
+            case 3: {
                 int timKiemLuaChon = -1;
                 do{
                     printf("====== TIM KIEM MON AN ======\n");
@@ -124,7 +135,7 @@ int main() {
                             break;
                         }
 
-                        case 4:{
+                        case 4: {
                             double giaMin, giaMax;
                             bool hopLe = false;
                             printf("Nhap khoang gia can tim (giaMin giaMax): ");
@@ -221,7 +232,7 @@ int main() {
                 break;
             }
 
-            case 5:{
+            case 5: {
                 char ma[15];
                 printf("Nhap ma mon an can cap nhat: ");
                 while (getchar() != '\n');
@@ -235,7 +246,7 @@ int main() {
                 break;
             }
             
-            case 6:{
+            case 6: {
                 int sapXepLuaChon = -1;
                 do{
                     printf("====== SAP XEP THUC DON ======\n");
@@ -311,148 +322,180 @@ int main() {
                 break;
             }
             
-            case 7:
-{
-    Ban ban[10];
-    for(int i = 0; i < 10; i++)
-        khoiTaoBan(&ban[i], i + 1);
-    int luaChonBan = -1;
-    do
-    {
-        printf("\n====== QUAN LY BAN AN & THANH TOAN ======\n");
-        printf("1. Hien thi trang thai ban\n");
-        printf("2. Goi mon cho ban\n");
-        printf("3. Xem hoa don ban\n");
-        printf("4. Thanh toan ban\n");
-        printf("0. Quay lai menu chinh\n");
-        printf("Nhap lua chon: ");
-        scanf("%d", &luaChonBan);
-        switch(luaChonBan)
-        {
-            case 1:
-            {
-                printf("\n====== TRANG THAI BAN ======\n");
+            case 7: {
+                Ban ban[10];
                 for(int i = 0; i < 10; i++)
+                    khoiTaoBan(&ban[i], i + 1);
+                int luaChonBan = -1;
+                do
                 {
-                    printf("Ban %d: ", ban[i].SoBan);
-
-                    if(ban[i].TrangThai)
+                    printf("\n====== QUAN LY BAN AN & THANH TOAN ======\n");
+                    printf("1. Hien thi trang thai ban\n");
+                    printf("2. Goi mon cho ban\n");
+                    printf("3. Xem hoa don ban\n");
+                    printf("4. Thanh toan ban\n");
+                    printf("0. Quay lai menu chinh\n");
+                    printf("Nhap lua chon: ");
+                    scanf("%d", &luaChonBan);
+                    switch(luaChonBan)
                     {
-                        printf("Dang phuc vu - Tong tien: %.2lf\n",
-                               tinhTongTien(&ban[i]));
-                    }
-                    else
-                    {
-                        printf("Trong\n");
-                    }
-                }
+                        case 1:
+                        {
+                            printf("\n====== TRANG THAI BAN ======\n");
+                            for(int i = 0; i < 10; i++)
+                            {
+                                printf("Ban %d: ", ban[i].SoBan);
 
+                                if(ban[i].TrangThai)
+                                {
+                                    printf("Dang phuc vu - Tong tien: %.2lf\n",
+                                           tinhTongTien(&ban[i]));
+                                }
+                                else
+                                {
+                                    printf("Trong\n");
+                                }
+                            }
+
+                            break;
+                        }
+
+                        case 2:
+                        {
+                            int soBan;
+                            char maMon[15];
+                            printf("Nhap so ban: ");
+                            scanf("%d", &soBan);
+                            if(soBan < 1 || soBan > 10)
+                            {
+                                printf("So ban khong hop le!\n");
+                                break;
+                            }
+                            printf("Nhap ma mon an: ");
+                            scanf("%s", maMon);
+                            MA*mon = timKiemTheoMa(&td, maMon);
+                            if(mon == NULL)
+                            {
+                                printf("Khong tim thay mon an!\n");
+                            }
+                            else
+                            {
+                                if(goiMon(&ban[soBan - 1], mon))
+                                {
+                                    printf("Goi mon thanh cong!\n");
+                                    printf("Mon: %s - %.2lf\n",
+                                           mon->Ten, mon->Gia);
+                                }
+                                else
+                                {
+                                    printf("Goi mon that bai!\n");
+                                }
+                            }
+                            break;
+                        }
+
+                        case 3:
+                        {
+                            int soBan;
+                            printf("Nhap so ban: ");
+                            scanf("%d", &soBan);
+                            if(soBan < 1 || soBan > 10)
+                            {
+                                printf("So ban khong hop le!\n");
+                                break;
+                            }
+                            if(!ban[soBan - 1].TrangThai)
+                            {
+                                printf("Ban %d dang trong!\n", soBan);
+                                break;
+                            }
+                            printf("\n====== HOA DON BAN %d ======\n", soBan);
+                            MA *p = ban[soBan - 1].HoaDon;
+                            while(p != NULL)
+                            {
+                                printf("%s - %s - %.2lf\n",
+                                       p->MaMon,
+                                       p->Ten,
+                                       p->Gia);
+
+                                p = p->next;
+                            }
+                            printf("Tong tien: %.2lf\n",
+                                   tinhTongTien(&ban[soBan - 1]));
+                            break;
+                        }
+
+                        case 4:
+                        {
+                            int soBan;
+                            printf("Nhap so ban can thanh toan: ");
+                            scanf("%d", &soBan);
+                            if(soBan < 1 || soBan > 10)
+                            {
+                                printf("So ban khong hop le!\n");
+                                break;
+                            }
+                            if(!ban[soBan - 1].TrangThai)
+                            {
+                                printf("Ban %d dang trong!\n", soBan);
+                                break;
+                            }
+                            double tong = tinhTongTien(&ban[soBan - 1]);
+                            printf("\nTong tien ban %d: %.2lf\n",
+                                   soBan, tong);
+                            printf("Thanh toan thanh cong!\n");
+                            thanhToanBan(&ban[soBan - 1]);
+                            break;
+                        }
+
+                        case 0:
+                        {
+                            printf("Quay lai menu chinh\n");
+                            break;
+                        }
+
+                        default:
+                        {
+                            printf("Lua chon khong hop le!\n");
+                        }
+                    }
+                }while(luaChonBan != 0);
                 break;
             }
 
-            case 2:
-            {
-                int soBan;
-                char maMon[15];
-                printf("Nhap so ban: ");
-                scanf("%d", &soBan);
-                if(soBan < 1 || soBan > 10)
-                {
-                    printf("So ban khong hop le!\n");
-                    break;
-                }
-                printf("Nhap ma mon an: ");
-                scanf("%s", maMon);
-                MA*mon = timKiemTheoMa(&td, maMon);
-                if(mon == NULL)
-                {
-                    printf("Khong tim thay mon an!\n");
-                }
-                else
-                {
-                    if(goiMon(&ban[soBan - 1], mon))
-                    {
-                        printf("Goi mon thanh cong!\n");
-                        printf("Mon: %s - %.2lf\n",
-                               mon->Ten, mon->Gia);
-                    }
-                    else
-                    {
-                        printf("Goi mon that bai!\n");
-                    }
-                }
+            case 8: {
+                printf("Chuc nang hoan tac chua duoc trien khai!\n");
                 break;
             }
-            case 3:
-            {
-                int soBan;
-                printf("Nhap so ban: ");
-                scanf("%d", &soBan);
-                if(soBan < 1 || soBan > 10)
-                {
-                    printf("So ban khong hop le!\n");
-                    break;
-                }
-                if(!ban[soBan - 1].TrangThai)
-                {
-                    printf("Ban %d dang trong!\n", soBan);
-                    break;
-                }
-                printf("\n====== HOA DON BAN %d ======\n", soBan);
-                MA *p = ban[soBan - 1].HoaDon;
-                while(p != NULL)
-                {
-                    printf("%s - %s - %.2lf\n",
-                           p->MaMon,
-                           p->Ten,
-                           p->Gia);
 
-                    p = p->next;
-                }
-                printf("Tong tien: %.2lf\n",
-                       tinhTongTien(&ban[soBan - 1]));
+            case 9: {
+                printf("Chuc nang hang doi che bien chua duoc trien khai!\n");
                 break;
             }
-            case 4:
-            {
-                int soBan;
-                printf("Nhap so ban can thanh toan: ");
-                scanf("%d", &soBan);
-                if(soBan < 1 || soBan > 10)
-                {
-                    printf("So ban khong hop le!\n");
-                    break;
-                }
-                if(!ban[soBan - 1].TrangThai)
-                {
-                    printf("Ban %d dang trong!\n", soBan);
-                    break;
-                }
-                double tong = tinhTongTien(&ban[soBan - 1]);
-                printf("\nTong tien ban %d: %.2lf\n",
-                       soBan, tong);
-                printf("Thanh toan thanh cong!\n");
-                thanhToanBan(&ban[soBan - 1]);
+
+            case 10: {
+                printf("Chuc nang tim kiem AVL chua duoc trien khai!\n");
                 break;
             }
-            case 0:
-            {
-                printf("Quay lai menu chinh\n");
+
+            case 11: {
+                printf("Chuc nang thong ke chua duoc trien khai!\n");
                 break;
             }
-            default:
-            {
-                printf("Lua chon khong hop le!\n");
+
+            case 12: {
+                printf("Chuc nang lich su thao tac chua duoc trien khai!\n");
+                break;
             }
-        }
-    }while(luaChonBan != 0);
-    break;
-}
-            case 0:{
+
+            case 0: {
                 printf("Thoat chuong trinh!\n");
                 break;
             }
-            default: printf("Lua chon khong hop le!\n");
+
+            default: {
+                printf("Lua chon khong hop le!\n");
+            }
         }
     } while (luonChon != 0);
     ghiFileThucDon(&td, "data/thucdon.txt");
