@@ -3,16 +3,10 @@
 StackUndo undoStack, redoStack;
 int main() {
     TD td;
-    QueueBep q;
-    DanhSachLichSu ls;
     khoiTaoThucDon(&td);
-<<<<<<< HEAD
     khoiTaoStack(&undoStack);
     khoiTaoStack(&redoStack);
-=======
-    khoiTaoQueue(&q);
-    khoiTaoLichSu(&ls);
->>>>>>> b377f18fed010c7381111270654b02fb9682cc4d
+
     int luonChon;
     docFileThucDon(&td, "data/thucdon.txt");
     // themMonAn(&td, taoMonAn("MA01", "Com Tam", "Mon chinh", 35.0));
@@ -43,8 +37,8 @@ int main() {
         printf("| 7. Quan ly ban an va thanh toan                      |\n");
         printf("| CHUC NANG NANG CAO                                   |\n");
         printf("| 8. Hoan tac thao tac                                 |\n");
-        printf("| 9. REDO THAO TAC                                 |\n");
-        printf("| 10. Hang doi che bien                                 |\n");
+        printf("| 9. REDO THAO TAC                                     |\n");
+        printf("| 10. Hang doi che bien                                |\n");
         printf("| 11. Tim kiem bang cay AVL                            |\n");
         printf("| 12. Thong ke                                         |\n");
         printf("| 13. Lich su thao tac                                 |\n");
@@ -477,104 +471,11 @@ int main() {
                 break;
             }
             case 9: {
-<<<<<<< HEAD
                 printf("\n====== REDO THAO TAC ======\n");
                 thucHienRedo(&td, &redoStack, &undoStack);
-=======
-    int chonBep;
-    do {
-        printf("\n====== HANG DOI CHE BIEN ======\n");
-        printf("1. Them don hang vao bep\n");
-        printf("2. Hien thi danh sach cho bep\n");
-        printf("3. Xu ly don hang dau tien\n");
-        printf("0. Quay lai menu chinh\n");
-        printf("Nhap lua chon: ");
-
-        if (scanf("%d", &chonBep) != 1) {
-            printf("Lua chon khong hop le!\n");
-            while (getchar() != '\n');
-            chonBep = -1;
-            continue;
-        }
-
-        switch (chonBep) {
-            case 1: {
-                int soBan;
-                char maMon[15];
-
-                printf("Nhap so ban: ");
-                if (scanf("%d", &soBan) != 1) {
-                    printf("So ban khong hop le!\n");
-                    while (getchar() != '\n');
-                    break;
-                }
-
-                if (soBan < 1 || soBan > 10) {
-                    printf("So ban phai tu 1 den 10!\n");
-                    break;
-                }
-
-                printf("Nhap ma mon an: ");
-                scanf("%14s", maMon);
-
-                MA *mon = timKiemTheoMa(&td, maMon);
-
-                if (mon == NULL) {
-                    printf("Khong tim thay mon an!\n");
-                    break;
-                }
-
-                if (enqueueOrder(&q, soBan, mon)) {
-                    char noiDung[150];
-                    snprintf(noiDung, sizeof(noiDung),
-                             "Them mon %s vao hang doi bep, ban %d",
-                             mon->Ten, soBan);
-                    ghiLog(&ls, noiDung);
-                    printf("Them don hang vao bep thanh cong!\n");
-                } else {
-                    printf("Them don hang that bai!\n");
-                }
->>>>>>> b377f18fed010c7381111270654b02fb9682cc4d
                 break;
             }
-
-            case 2: {
-                hienThiDanhSachChoBep(&q);
-                break;
-            }
-
-            case 3: {
-                DonHangBep don;
-
-                if (dequeueOrder(&q, &don)) {
-                    printf("\nDa xu ly don hang:\n");
-                    printf("So ban: %d\n", don.soBan);
-                    printf("Ma mon: %s\n", don.maMon);
-                    printf("Ten mon: %s\n", don.tenMon);
-
-                    char noiDung[150];
-                    snprintf(noiDung, sizeof(noiDung),
-                             "Xu ly mon %s, ban %d",
-                             don.tenMon, don.soBan);
-                    ghiLog(&ls, noiDung);
-                } else {
-                    printf("Khong co don hang de xu ly!\n");
-                }
-                break;
-            }
-
-            case 0:
-                printf("Quay lai menu chinh\n");
-                break;
-
-            default:
-                printf("Lua chon khong hop le!\n");
-        }
-    } while (chonBep != 0);
-
-    break;
-}
-
+   
             case 10: {
                 printf("Chuc nang tim kiem AVL chua duoc trien khai!\n");
                 break;
@@ -586,70 +487,9 @@ int main() {
             }
 
             case 12: {
-    int chonLichSu;
-    do {
-        printf("\n====== LICH SU THAO TAC ======\n");
-        printf("1. Hien thi lich su\n");
-        printf("2. Ghi them lich su\n");
-        printf("3. Xuat lich su ra file\n");
-        printf("0. Quay lai menu chinh\n");
-        printf("Nhap lua chon: ");
-
-        if (scanf("%d", &chonLichSu) != 1) {
-            printf("Lua chon khong hop le!\n");
-            while (getchar() != '\n');
-            chonLichSu = -1;
-            continue;
-        }
-
-        switch (chonLichSu) {
-            case 1: {
-                hienThiLichSu(&ls);
+                printf("Chuc nang lich su thao tac chua duoc trien khai!\n");
                 break;
             }
-
-            case 2: {
-                char noiDung[200];
-
-                while (getchar() != '\n');
-
-                printf("Nhap noi dung thao tac: ");
-                if (fgets(noiDung, sizeof(noiDung), stdin) == NULL) {
-                    printf("Khong doc duoc noi dung!\n");
-                    break;
-                }
-
-                noiDung[strcspn(noiDung, "\n")] = '\0';
-
-                if (ghiLog(&ls, noiDung)) {
-                    printf("Ghi lich su thanh cong!\n");
-                } else {
-                    printf("Ghi lich su that bai!\n");
-                }
-                break;
-            }
-
-            case 3: {
-                if (xuatLogRaFile(&ls, "data/lichsu.txt")) {
-                    printf("Da xuat lich su ra data/lichsu.txt\n");
-                } else {
-                    printf("Xuat file that bai!\n");
-                }
-                break;
-            }
-
-            case 0:
-                printf("Quay lai menu chinh\n");
-                break;
-
-            default:
-                printf("Lua chon khong hop le!\n");
-        }
-    } while (chonLichSu != 0);
-
-    break;
-}
-
             case 0: {
                 printf("Thoat chuong trinh!\n");
                 break;
@@ -659,7 +499,7 @@ int main() {
                 printf("Lua chon khong hop le!\n");
             }
         }
-<<<<<<< HEAD
+
     } while (luonChon != 0);
     ghiFileThucDon(&td, "data/thucdon.txt");
     giaiPhongThucDon(&td);
@@ -667,12 +507,5 @@ int main() {
     giaiPhongStack(&redoStack);
     
     return 0;
-=======
-} while (luonChon != 0);
-ghiFileThucDon(&td, "data/thucdon.txt");
-giaiPhongQueue(&q);
-giaiPhongLichSu(&ls);
-giaiPhongThucDon(&td);
-return 0;
->>>>>>> b377f18fed010c7381111270654b02fb9682cc4d
-}
+
+} 
