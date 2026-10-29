@@ -1,6 +1,8 @@
 #include "include/nha_hang.h"
 #include "include/nang_cao.h"
 StackUndo undoStack, redoStack;
+QueueBep queueBep;
+LichSuLog lichSu;
 int main() {
     TD td;
     khoiTaoThucDon(&td);
@@ -9,6 +11,7 @@ int main() {
 
     int luonChon;
     docFileThucDon(&td, "data/thucdon.txt");
+    ghiLog(&lichSu, "Chuong trinh bat dau");
     // themMonAn(&td, taoMonAn("MA01", "Com Tam", "Mon chinh", 35.0));
     // themMonAn(&td, taoMonAn("MA02", "Pho Bo", "Mon chinh", 45.0));
     // themMonAn(&td, taoMonAn("MA03", "Tra Sua", "Giai khat", 25.0));
@@ -387,6 +390,7 @@ int main() {
                                     printf("Goi mon thanh cong!\n");
                                     printf("Mon: %s - %.2lf\n",
                                            mon->Ten, mon->Gia);
+                                    enqueueOrder(&queueBep, soBan, mon);
                                 }
                                 else
                                 {
@@ -477,7 +481,26 @@ int main() {
             }
    
             case 10: {
-                printf("Chuc nang tim kiem AVL chua duoc trien khai!\n");
+                int qChoice = -1;
+                do {
+                printf("\n====== HAng doi che bien ======\n");
+                    printf("1. Hien thi danh sach cho bep\n");
+                    printf("2. Xu ly don tiep theo (Dequeue)\n");
+                    printf("0. Quay lai menu chinh\n");
+                    printf("Nhap lua chon: ");
+                    scanf("%d", &qChoice);
+                    if (qChoice == 1) {
+                        hienThiDanhSachChoBep(&queueBep);
+                    } else if (qChoice == 2) {
+                        DonHangBep don;
+                        if (dequeueOrder(&queueBep, &don)) {
+                            printf("=> Da xu ly xong don: Ban %d - Mon: %s (%s)\n", don.soBan, don.tenMon, don.maMon);
+                            ghiLog(&lichSu, "Bep hoan thanh mot don hang.");
+                        } else {
+                            printf("Khong co don hang nao dang cho!\n");
+                        }
+                    }
+                } while (qChoice != 0);
                 break;
             }
 
@@ -488,6 +511,10 @@ int main() {
 
             case 12: {
                 printf("Chuc nang lich su thao tac chua duoc trien khai!\n");
+                break;
+            }
+            case 13: {
+                hienThiLichSu(&lichSu);
                 break;
             }
             case 0: {
@@ -505,7 +532,8 @@ int main() {
     giaiPhongThucDon(&td);
     giaiPhongStack(&undoStack);
     giaiPhongStack(&redoStack);
-    
+    giaiPhongQueue(&queueBep);
+    giaiPhongLichSu(&lichSu);
     return 0;
 
 } 
