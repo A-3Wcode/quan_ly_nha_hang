@@ -58,9 +58,14 @@ void hienThiThucDon(const TD *td);
 
 // Tìm kiếm
 MA* timKiemTheoMa(const TD *td, const char ma[]);
+bool themMonAnSaoChep(TD *td, const MA *monGoc);
 TD timKiemTheoTen(const TD *td, const char ten[]);
 TD timKiemTheoLoai(const TD *td, const char loai[]);
 TD timKiemTheoKhoangGia(const TD *td, double giaMin, double giaMax);
+void timeLinearTheoMa(const TD* td, const char maMon[]);
+void timeLinearTheoTen(const TD* td, const char ten[]);
+void timeLinearTheoLoai(const TD* td, const char loai[]);
+void timeLinearTheoKhoangGia(const TD* td, double giaMin, double giaMax);
 
 // Xóa & Cập nhật
 bool xoaTheoMa(TD *td, const char ma[]);

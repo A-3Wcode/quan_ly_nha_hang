@@ -12,6 +12,29 @@ MA* timKiemTheoMa(const TD *td, const char ma[]){
 	return NULL;
 }
 
+bool themMonAnSaoChep(TD *td, const MA *monGoc) {
+    if (td == NULL || monGoc == NULL) return false;
+
+    MA *newNode = (MA *)malloc(sizeof(MA));
+	if (!newNode) return false;
+
+	strcpy(newNode->MaMon, monGoc->MaMon);
+	strcpy(newNode->Ten, monGoc->Ten);
+	strcpy(newNode->Loai, monGoc->Loai);
+	newNode->Gia = monGoc->Gia;
+	newNode->next = NULL;
+
+	if (td->head == NULL) {
+		td->head = newNode;
+		td->tail = newNode;
+	} else {
+		td->tail->next = newNode;
+		td->tail = newNode;
+	}
+	td->count++;
+	return true;
+}
+
 TD timKiemTheoTen(const TD *td, const char ten[]){
 	TD ketQua;
 	khoiTaoThucDon(&ketQua);
@@ -20,9 +43,7 @@ TD timKiemTheoTen(const TD *td, const char ten[]){
 	
 	for(MA* troDuyet = td->head; troDuyet != NULL; troDuyet = troDuyet->next){
 		if(strstr(troDuyet->Ten, ten) != NULL){
-			MA *monTimThay = taoMonAn(troDuyet->MaMon, 
-				troDuyet->Ten, troDuyet->Loai, troDuyet->Gia);
-				themMonAn(&ketQua, monTimThay);
+			themMonAnSaoChep(&ketQua, troDuyet);
 		}
 	}
 	return ketQua;
@@ -36,9 +57,7 @@ TD timKiemTheoLoai(const TD *td, const char loai[]){
 	
 	for(MA* troDuyet = td->head; troDuyet != NULL; troDuyet = troDuyet->next){
 		if(strcmp(troDuyet->Loai, loai) == 0){
-			MA *monTimThay = taoMonAn(troDuyet->MaMon, 
-				troDuyet->Ten, troDuyet->Loai, troDuyet->Gia);
-				themMonAn(&ketQua, monTimThay);
+			themMonAnSaoChep(&ketQua, troDuyet);
 		}
 	}
 	return ketQua;
@@ -52,9 +71,7 @@ TD timKiemTheoKhoangGia(const TD *td, double giaMin, double giaMax){
 	
 	for(MA* troDuyet = td->head; troDuyet != NULL; troDuyet = troDuyet->next){
 		if(troDuyet->Gia >= giaMin && troDuyet->Gia <= giaMax){
-			MA *monTimThay = taoMonAn(troDuyet->MaMon, 
-				troDuyet->Ten, troDuyet->Loai, troDuyet->Gia);
-				themMonAn(&ketQua, monTimThay);
+			themMonAnSaoChep(&ketQua, troDuyet);
 		}
 	}
 	return ketQua;

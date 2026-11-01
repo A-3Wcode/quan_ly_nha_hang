@@ -65,7 +65,6 @@ void giaiPhongQueue(QueueBep* q);
 // 3. TREE (CÂY AVL CÂN BẰNG): TÌM KIẾM MÓN TỐC ĐỘ CAO O(log N)
 
 typedef struct NodeAVL {
-    char maMon[15];
     MA* monAnPtr;               // Con trỏ trỏ trực tiếp đến nút trong TD
     int height;                 // Chiều cao nút
     struct NodeAVL* left;
@@ -79,13 +78,23 @@ typedef struct AVLThucDon {
 void khoiTaoAVL(AVLThucDon* tree);
 int layChieuCao(NodeAVL* node);
 int layHeSoCanBang(NodeAVL* node);
+int max(int a, int b);
 NodeAVL* xoayPhai(NodeAVL* y);
 NodeAVL* xoayTrai(NodeAVL* x);
 NodeAVL* chenVaoAVL(NodeAVL* node, MA* monAnPtr);
 void xayDungCayTuThucDon(AVLThucDon* tree, const TD* td);
-MA* timKiemAVL(const NodeAVL* root, const char maMon[]);
+MA* timKiemAVLTheoMa(const NodeAVL* root, const char maMon[]);
+void duyetAVLTen(const NodeAVL* root, const char ten[], TD* ketQua);
+void duyetAVLLoai(const NodeAVL* root, const char loai[], TD* ketQua);
+void duyetAVLKhoangGia(const NodeAVL* root, double giaMin, double giaMax, TD* ketQua);
+TD timKiemAVLTheoTen(const NodeAVL* root, const char ten[]);
+TD timKiemAVLTheoLoai(const NodeAVL* root, const char loai[]);
+TD timKiemAVLTheoKhoangGia(const NodeAVL* root, double giaMin, double giaMax);
 void giaiPhongAVL(NodeAVL* root);
-
+void timeAVLTheoMa(const AVLThucDon* tree, const char maMon[]);
+void timeAVLTheoTen(const AVLThucDon* tree, const char ten[]);
+void timeAVLTheoLoai(const AVLThucDon* tree, const char loai[]);
+void timeAVLTheoKhoangGia(const AVLThucDon* tree, double giaMin, double giaMax);
 
 // 4. THỐNG KÊ DỮ LIỆU
 

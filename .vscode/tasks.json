@@ -17,6 +17,7 @@
                 "${workspaceFolder}/src/stack_undo.c",
                 "${workspaceFolder}/src/thong_ke.c",
                 "${workspaceFolder}/src/timkiem_sapxep.c",
+                "${workspaceFolder}/src/tocdosearch.c",
                 "${workspaceFolder}/src/xoa_capnhat.c",
                 "-I",
                 "${workspaceFolder}/include",

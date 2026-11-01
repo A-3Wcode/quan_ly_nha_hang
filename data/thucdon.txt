@@ -5,8 +5,46 @@ MA04,Bun Ca,Mon chinh,30
 MA05,Bun Cha,Mon chinh,35
 MA06,Com Ga,Mon chinh,30
 MA07,Pho Ga,Mon chinh,30
-MA08,Tra Da,Gia khat,5
+MA08,Tra Da,Giai khat,5
 MA09,Bun Dau,Mon chinh,80
 MA10,Banh Chuoi,Trang mieng,25
 MA11,Salad,Khai vi,30
 MA12,Banh My,Mon phu,8
+MA13,Hu Tieu Nam Vang,Mon chinh,40
+MA14,Mien Ga,Mon chinh,35
+MA15,Banh Xeo,Mon chinh,50
+MA16,Banh Khot,Mon chinh,35
+MA17,Go Cuon,Khai vi,20
+MA18,Cha Gio,Khai vi,25
+MA19,Sup Cua,Khai vi,25
+MA20,Chao Long,Mon chinh,30
+MA21,Bun Bo Hue,Mon chinh,45
+MA22,Bun Rieu,Mon chinh,35
+MA23,Com Chien Duong Chau,Mon chinh,40
+MA24,Mien Xao Hai San,Mon chinh,50
+MA25,Tra Dao Cam Sa,Giai khat,30
+MA26,Tra Chanh,Giai khat,15
+MA27,Sinh To Bo,Giai khat,35
+MA28,NuoC Ep Cam,Giai khat,25
+MA29,Ca Phe Den,Giai khat,18
+MA30,Ca Phe Sua,Giai khat,22
+MA31,Che Thai,Trang mieng,25
+MA32,Che Bap,Trang mieng,15
+MA33,Banh Flan,Trang mieng,15
+MA34,Sua Chua Nep Cam,Trang mieng,20
+MA35,Rau Cau,Trang mieng,15
+MA36,Khoai Tay Chien,Mon phu,25
+MA37,Ga Ran,Mon phu,35
+MA38,Xoi Man,Mon chinh,25
+MA39,Banh Bao,Mon phu,15
+MA40,Banh Cuon,Mon chinh,30
+MA41,Banh Uot,Mon chinh,25
+MA42,Canh Chua Ca,Mon chinh,45
+MA43,Thit Kho To,Mon chinh,50
+MA44,Bo Lu Luc,Mon chinh,65
+MA45,MUC Chien Giot,Mon chinh,60
+MA46,Lau Thai,Mon chinh,150
+MA47,Lau Hai San,Mon chinh,180
+MA48,Tra Vait,Giai khat,30
+MA49,Kem Dua,Trang mieng,30
+MA50,Kim Chi,Khai vi,15
