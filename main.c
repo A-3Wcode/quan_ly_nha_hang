@@ -311,20 +311,20 @@ int main() {
                     khoiTaoBan(&ban[i], i + 1);
                 int luaChonBan = -1;
 
-                // // Bàn 1: Gọi Cơm Tấm (2 suất), Trà Đá (2 ly) -> Thanh toán
+                // Bàn 1: Gọi Cơm Tấm (2 suất), Trà Đá (2 ly) -> Thanh toán
                 // goiMon(&ban[0], timKiemTheoMa(&td, "MA01"));
                 // goiMon(&ban[0], timKiemTheoMa(&td, "MA01"));
                 // goiMon(&ban[0], timKiemTheoMa(&td, "MA05"));
                 // goiMon(&ban[0], timKiemTheoMa(&td, "MA05"));
                 // thanhToanBan(&ban[0], &qldt, dsThongKe, soLuongMon); // Bill: 100k
 
-                // // Bàn 2: Gọi Phở Bò, Trà Sữa, Bánh Flan -> Thanh toán
+                // Bàn 2: Gọi Phở Bò, Trà Sữa, Bánh Flan -> Thanh toán
                 // goiMon(&ban[1], timKiemTheoMa(&td, "MA02"));
                 // goiMon(&ban[1], timKiemTheoMa(&td, "MA03"));
                 // goiMon(&ban[1], timKiemTheoMa(&td, "MA06"));
                 // thanhToanBan(&ban[1], &qldt, dsThongKe, soLuongMon); // Bill: 105k
 
-                // // Bàn 3: Nhóm đông người gọi nhiều Cơm Tấm, Trà Sữa -> Thanh toán
+                // Bàn 3: Nhóm đông người gọi nhiều Cơm Tấm, Trà Sữa -> Thanh toán
                 // goiMon(&ban[2], timKiemTheoMa(&td, "MA01"));
                 // goiMon(&ban[2], timKiemTheoMa(&td, "MA01"));
                 // goiMon(&ban[2], timKiemTheoMa(&td, "MA01"));
@@ -334,12 +334,12 @@ int main() {
                 // goiMon(&ban[2], timKiemTheoMa(&td, "MA09"));
                 // thanhToanBan(&ban[2], &qldt, dsThongKe, soLuongMon); // Bill: 250k
 
-                // // Bàn 4: Gọi Bún Chả, Nước Cam -> Thanh toán
+                // Bàn 4: Gọi Bún Chả, Nước Cam -> Thanh toán
                 // goiMon(&ban[3], timKiemTheoMa(&td, "MA04"));
                 // goiMon(&ban[3], timKiemTheoMa(&td, "MA10"));
                 // thanhToanBan(&ban[3], &qldt, dsThongKe, soLuongMon); // Bill: 75k
 
-                // // Bàn 5: ĐANG ĂN (Chưa thanh toán) -> Dùng để kiểm tra doanh thu KHÔNG bị cộng dồn bàn chưa trả tiền
+                // Bàn 5: ĐANG ĂN (Chưa thanh toán) -> Dùng để kiểm tra doanh thu KHÔNG bị cộng dồn bàn chưa trả tiền
                 // goiMon(&ban[4], timKiemTheoMa(&td, "MA07"));
                 // goiMon(&ban[4], timKiemTheoMa(&td, "MA08"));
                 
