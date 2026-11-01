@@ -1,4 +1,5 @@
 #include "../include/nha_hang.h"
+#include "../include/nang_cao.h"
 /*Thuc hien: Tran Pham Vinh Quang*/
 // 8. Quan ly Ban an & Thanh toan
 void khoiTaoBan(Ban *ban, int soBan)
@@ -37,15 +38,19 @@ double tinhTongTien(Ban *ban)
     ban->TongHoaDon = tong;
     return tong;
 }
-void thanhToanBan(Ban *ban)
-{
-    MA *p=ban->HoaDon;
-    while (p != NULL)
-    {
-    MA *temp = p;
-    p = p->next;
-    free(temp);
+
+void thanhToanBan(Ban *ban, QuanLyDoanhThu *qldt, ThongKeMon dsThongKe[], int soLuongMon) {
+    if (ban == NULL || !ban->TrangThai) return;
+
+    capNhatThongKeKhiThanhToan(ban, qldt, dsThongKe, soLuongMon);
+
+    MA *p = ban->HoaDon;
+    while (p != NULL) {
+        MA *temp = p;
+        p = p->next;
+        free(temp);
     }
+
     ban->HoaDon = NULL;
     ban->TongHoaDon = 0;
     ban->TrangThai = false;

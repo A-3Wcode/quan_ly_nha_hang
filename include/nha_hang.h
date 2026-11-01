@@ -33,6 +33,20 @@ typedef struct Ban {
     double TongHoaDon;      // Tổng tiền hiện tại của bàn
 } Ban;
 
+// Struct QuanLyDoanhThu (Quản lý doanh thu tích lũy hệ thống)
+typedef struct QuanLyDoanhThu {
+    double tongDoanhThuDaThanhToan;
+    int soHoaDonDaThanhToan;
+} QuanLyDoanhThu;
+
+typedef struct ThongKeMon {
+    char maMon[15];
+    char tenMon[50];
+    char loai[30];
+    double gia;
+    int soLuongBan;
+    double tongDoanhThuMon;
+} ThongKeMon;
 
 // 2. KHAI BÁO CÁC HÀM CƠ BẢN
 
@@ -86,6 +100,5 @@ bool docFileThucDon(TD *td, const char tenFile[]);
 void khoiTaoBan(Ban *ban, int soBan);
 bool goiMon(Ban *ban, const MA *mon);
 double tinhTongTien(Ban *ban);
-void thanhToanBan(Ban *ban);
-
+void thanhToanBan(Ban *ban, QuanLyDoanhThu *qldt, ThongKeMon dsThongKe[], int soLuongMon);
 #endif

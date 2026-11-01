@@ -27,6 +27,11 @@ int main() {
     // themMonAn(&td, taoMonAn("MA11", "Salad", "Khai vi", 30.0));
     // themMonAn(&td, taoMonAn("MA12", "Banh My", "Mon phu", 8.0));
 
+    QuanLyDoanhThu qldt;
+    khoiTaoQuanLyDoanhThu(&qldt);
+    
+    ThongKeMon dsThongKe[100];
+    int soLuongMon = khoiTaoDanhSachThongKe(&td, dsThongKe);
     do {
         printf("\n+------------------------------------------------------+\n");
         printf("|                QUAN LY NHA HANG                      |\n");
@@ -305,6 +310,39 @@ int main() {
                 for(int i = 0; i < 10; i++)
                     khoiTaoBan(&ban[i], i + 1);
                 int luaChonBan = -1;
+
+                // // Bàn 1: Gọi Cơm Tấm (2 suất), Trà Đá (2 ly) -> Thanh toán
+                // goiMon(&ban[0], timKiemTheoMa(&td, "MA01"));
+                // goiMon(&ban[0], timKiemTheoMa(&td, "MA01"));
+                // goiMon(&ban[0], timKiemTheoMa(&td, "MA05"));
+                // goiMon(&ban[0], timKiemTheoMa(&td, "MA05"));
+                // thanhToanBan(&ban[0], &qldt, dsThongKe, soLuongMon); // Bill: 100k
+
+                // // Bàn 2: Gọi Phở Bò, Trà Sữa, Bánh Flan -> Thanh toán
+                // goiMon(&ban[1], timKiemTheoMa(&td, "MA02"));
+                // goiMon(&ban[1], timKiemTheoMa(&td, "MA03"));
+                // goiMon(&ban[1], timKiemTheoMa(&td, "MA06"));
+                // thanhToanBan(&ban[1], &qldt, dsThongKe, soLuongMon); // Bill: 105k
+
+                // // Bàn 3: Nhóm đông người gọi nhiều Cơm Tấm, Trà Sữa -> Thanh toán
+                // goiMon(&ban[2], timKiemTheoMa(&td, "MA01"));
+                // goiMon(&ban[2], timKiemTheoMa(&td, "MA01"));
+                // goiMon(&ban[2], timKiemTheoMa(&td, "MA01"));
+                // goiMon(&ban[2], timKiemTheoMa(&td, "MA03"));
+                // goiMon(&ban[2], timKiemTheoMa(&td, "MA03"));
+                // goiMon(&ban[2], timKiemTheoMa(&td, "MA03"));
+                // goiMon(&ban[2], timKiemTheoMa(&td, "MA09"));
+                // thanhToanBan(&ban[2], &qldt, dsThongKe, soLuongMon); // Bill: 250k
+
+                // // Bàn 4: Gọi Bún Chả, Nước Cam -> Thanh toán
+                // goiMon(&ban[3], timKiemTheoMa(&td, "MA04"));
+                // goiMon(&ban[3], timKiemTheoMa(&td, "MA10"));
+                // thanhToanBan(&ban[3], &qldt, dsThongKe, soLuongMon); // Bill: 75k
+
+                // // Bàn 5: ĐANG ĂN (Chưa thanh toán) -> Dùng để kiểm tra doanh thu KHÔNG bị cộng dồn bàn chưa trả tiền
+                // goiMon(&ban[4], timKiemTheoMa(&td, "MA07"));
+                // goiMon(&ban[4], timKiemTheoMa(&td, "MA08"));
+                
                 do
                 {
                     printf("\n====== QUAN LY BAN AN & THANH TOAN ======\n");
@@ -433,7 +471,7 @@ int main() {
                             printf("\nTong tien ban %d: %.2lf\n",
                                    soBan, tong);
                             printf("Thanh toan thanh cong!\n");
-                            thanhToanBan(&ban[soBan - 1]);
+                            thanhToanBan(&ban[soBan - 1], &qldt, dsThongKe, soLuongMon);
                             break;
                         }
 
@@ -566,7 +604,12 @@ int main() {
             }
 
             case 12: {
-                printf("Chuc nang lich su thao tac chua duoc trien khai!\n");
+                if (qldt.soHoaDonDaThanhToan == 0) {
+                    printf("Khong co du lieu thong ke!\n");
+                    break;
+                }
+
+                hienThiBaoCaoThongKe(&qldt, dsThongKe, soLuongMon);
                 break;
             }
             case 13: {

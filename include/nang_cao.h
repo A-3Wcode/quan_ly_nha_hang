@@ -98,11 +98,12 @@ void timeAVLTheoKhoangGia(const AVLThucDon* tree, double giaMin, double giaMax);
 
 // 4. THỐNG KÊ DỮ LIỆU
 
-double tinhGiaTrungBinhThucDon(const TD* td);
-double tinhTongGiaTriThucDon(const TD* td);
-void thongKeSoMonTheoLoai(const TD* td);
-double tinhTongDoanhThuCacBan(const Ban danhSachBan[], int soBanToiDa);
-
+void khoiTaoQuanLyDoanhThu(QuanLyDoanhThu *qldt);
+int khoiTaoDanhSachThongKe(const TD *td, ThongKeMon dsThongKe[]);
+void capNhatThongKeKhiThanhToan(Ban *ban, QuanLyDoanhThu *qldt, ThongKeMon dsThongKe[], int soLuongMon);
+double tinhGiaTriHoaDonTrungBinh(const QuanLyDoanhThu *qldt);
+void sapXepBestSellersGiamDan(ThongKeMon dsThongKe[], int n);
+void hienThiBaoCaoThongKe(const QuanLyDoanhThu *qldt, ThongKeMon dsThongKe[], int n);
 
 // 5. LỊCH SỬ THAO TÁC (LOGGING SYSTEM)
 
