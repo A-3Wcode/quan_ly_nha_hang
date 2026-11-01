@@ -8,6 +8,8 @@ int main() {
     khoiTaoThucDon(&td);
     khoiTaoStack(&undoStack);
     khoiTaoStack(&redoStack);
+    khoiTaoQueue(&queueBep);
+    khoiTaoLichSu(&lichSu);
 
     int luonChon;
     docFileThucDon(&td, "data/thucdon.txt");
@@ -365,6 +367,7 @@ int main() {
                             break;
                         }
 
+                   
                         case 2:
                         {
                             int soBan;
@@ -387,10 +390,19 @@ int main() {
                             {
                                 if(goiMon(&ban[soBan - 1], mon))
                                 {
-                                    printf("Goi mon thanh cong!\n");
-                                    printf("Mon: %s - %.2lf\n",
-                                           mon->Ten, mon->Gia);
-                                    enqueueOrder(&queueBep, soBan, mon);
+                                printf("Goi mon thanh cong!\n");
+                                printf("Mon: %s - %.2lf\n", mon->Ten, mon->Gia);
+
+                            if(enqueueOrder(&queueBep, soBan, mon))
+                         {
+                            printf("Da them don hang vao bep!\n");
+                            ghiLog(&lichSu, "Khach hang goi mon thanh cong");
+                        }
+                        else
+                    {
+                         printf("Them don hang vao bep that bai!\n");
+                    }
+
                                 }
                                 else
                                 {
