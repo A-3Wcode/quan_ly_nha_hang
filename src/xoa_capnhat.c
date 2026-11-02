@@ -125,8 +125,8 @@ bool xoaTheoMa(TD *td, const char ma[]){
         td->tail = truoc; 
     }
 
-    pushUndo(&undoStack, UNDO_XOA, current, NULL); 
-    giaiPhongStack(&redoStack);
+    // pushUndo(&undoStack, UNDO_XOA, current, NULL); 
+    // giaiPhongStack(&redoStack);
 
     free(current);
     td->count--;

@@ -143,8 +143,6 @@ void nhapDanhSachMonAn(TD *td){
 			}
 			if(strlen(ma) == 0){
 				printf("Ma khong duoc bo trong!\n");
-			}else if(!laChuoiSo(ma)){
-				printf("Ma mon an phai la chuoi so!Vui long nhap lai!\n");
 			}else if(kiemTraTrungMa(td, ma)){
 				printf("Ma mon da ton tai!Vui long nhap la ma.\n");
 			}else{
