@@ -85,6 +85,7 @@ bool thucHienUndo(TD* td, StackUndo* stackUndo, StackUndo* stackRedo) {
             break;
         }
     }
+    sapXepTheoMa(td, true);
     return true;
 }
 

@@ -104,7 +104,7 @@ bool xoaTheoMa(TD *td, const char ma[]){
         if(td->head == NULL) {
             td->tail = NULL; 
         }
-        pushUndo(&undoStack, UNDO_XOA, current, NULL); 
+        pushUndo(&undoStack, UNDO_XOA, current, NULL);
         giaiPhongStack(&redoStack);
 
 		free(current);
@@ -124,9 +124,9 @@ bool xoaTheoMa(TD *td, const char ma[]){
     if(current == td->tail) {
         td->tail = truoc; 
     }
-    
+
     pushUndo(&undoStack, UNDO_XOA, current, NULL); 
-        giaiPhongStack(&redoStack);
+    giaiPhongStack(&redoStack);
 
     free(current);
     td->count--;
